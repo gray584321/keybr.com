@@ -18,6 +18,7 @@ import { type LessonState } from "./state/index.ts";
 export const Indicators = memo(function Indicators({
   state,
   liveSpeed = null,
+  tensionRatio = null,
 }: {
   readonly state: LessonState;
   /**
@@ -26,6 +27,11 @@ export const Indicators = memo(function Indicators({
    * is needed for live updates to propagate.
    */
   readonly liveSpeed?: number | null;
+  /**
+   * Current tension ratio (current dwell median / personal baseline).
+   * Same memo-friendly explicit-prop pattern as liveSpeed.
+   */
+  readonly tensionRatio?: number | null;
 }): ReactNode {
   const { keyStatsMap, summaryStats, lessonKeys, streakList, dailyGoal } =
     state;
@@ -65,6 +71,12 @@ export const Indicators = memo(function Indicators({
         aria-live="off"
       >
         {liveSpeed != null ? `${liveSpeed} CPM` : "— CPM"}
+        {tensionRatio != null && (
+          <span className={tensionClass(tensionRatio)}>
+            {" "}
+            · {tensionLabel(tensionRatio)}
+          </span>
+        )}
       </div>
       <GaugeRow summaryStats={summaryStats} names={names} />
       <KeySetRow
@@ -112,4 +124,17 @@ export const Indicators = memo(function Indicators({
       )}
     </div>
   );
+
+  function tensionLabel(r: number): string {
+    if (r < 0.9) return "loose";
+    if (r < 1.1) return "relaxed";
+    if (r < 1.25) return "firm";
+    return "tight";
+  }
+
+  function tensionClass(r: number): string {
+    if (r >= 1.25) return styles.tensionTight;
+    if (r >= 1.1) return styles.tensionFirm;
+    return styles.tensionRelaxed;
+  }
 });

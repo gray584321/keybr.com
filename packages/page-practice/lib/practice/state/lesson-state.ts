@@ -23,13 +23,14 @@ import {
   toTextDisplaySettings,
   toTextInputSettings,
 } from "@keybr/textinput";
-import { type IInputEvent } from "@keybr/textinput-events";
+import { type DwellMeter, type IInputEvent } from "@keybr/textinput-events";
 import { type CodePoint } from "@keybr/unicode";
 import { type LastLesson } from "./last-lesson.ts";
 import { type Progress } from "./progress.ts";
 
 export class LessonState {
   readonly #onResult: (result: Result, textInput: TextInput) => void;
+  readonly #dwellMeter: DwellMeter | null;
   readonly settings: Settings;
   readonly lesson: Lesson;
   readonly textInputSettings: TextInputSettings;
@@ -50,8 +51,10 @@ export class LessonState {
   constructor(
     progress: Progress,
     onResult: (result: Result, textInput: TextInput) => void,
+    dwellMeter: DwellMeter | null = null,
   ) {
     this.#onResult = onResult;
+    this.#dwellMeter = dwellMeter;
     this.settings = progress.settings;
     this.lesson = progress.lesson;
     this.textInputSettings = toTextInputSettings(this.settings);
@@ -95,6 +98,23 @@ export class LessonState {
       timeStamp,
       makeStats(this.textInput.steps),
     );
+  }
+
+  /**
+   * Current key-dwell median in ms (rolling) — null when the meter has not
+   * yet collected enough samples. Validated proxy for typing force /
+   * forearm tension (PubMed 22897644).
+   */
+  get currentDwellMs(): number | null {
+    return this.#dwellMeter?.currentMedianMs ?? null;
+  }
+
+  /**
+   * Ratio of current dwell median to the user's personal baseline.
+   * Values noticeably greater than 1 indicate elevated typing tension.
+   */
+  get tensionRatio(): number | null {
+    return this.#dwellMeter?.tensionRatio ?? null;
   }
 
   /**

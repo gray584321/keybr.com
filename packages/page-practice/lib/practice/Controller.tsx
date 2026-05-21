@@ -1,7 +1,12 @@
 import { type KeyId, useKeyboard } from "@keybr/keyboard";
 import { type Result } from "@keybr/result";
 import { type LineList } from "@keybr/textinput";
-import { addKey, deleteKey, emulateLayout } from "@keybr/textinput-events";
+import {
+  addKey,
+  deleteKey,
+  DwellMeter,
+  emulateLayout,
+} from "@keybr/textinput-events";
 import { makeSoundPlayer } from "@keybr/textinput-sounds";
 import {
   useDocumentEvent,
@@ -70,12 +75,21 @@ function useLessonState(
   onResultRef.current = onResult;
 
   return useMemo(() => {
-    // New lesson.
-    const state = new LessonState(progress, (result, textInput) => {
-      setKey(key + 1);
-      lastLessonRef.current = makeLastLesson(result, textInput.steps);
-      onResultRef.current(result);
-    });
+    // New lesson. The DwellMeter persists for the duration of this useMemo
+    // closure, accumulating dwell-time samples across consecutive lessons
+    // in a single sitting. It resets only when the React `key` changes
+    // (i.e. settings switch, profile reload).
+    const dwellMeter = new DwellMeter();
+    progress.getTensionRatio = () => dwellMeter.tensionRatio;
+    const state = new LessonState(
+      progress,
+      (result, textInput) => {
+        setKey(key + 1);
+        lastLessonRef.current = makeLastLesson(result, textInput.steps);
+        onResultRef.current(result);
+      },
+      dwellMeter,
+    );
     state.lastLesson = lastLessonRef.current;
     setLines(state.lines);
     setDepressedKeys(state.depressedKeys);
@@ -97,11 +111,13 @@ function useLessonState(
       keyboard,
       {
         onKeyDown: (event) => {
+          dwellMeter.onKeyDown(event.code, event.timeStamp, event.key);
           setDepressedKeys(
             (state.depressedKeys = addKey(state.depressedKeys, event.code)),
           );
         },
         onKeyUp: (event) => {
+          dwellMeter.onKeyUp(event.code, event.timeStamp, event.key);
           setDepressedKeys(
             (state.depressedKeys = deleteKey(state.depressedKeys, event.code)),
           );

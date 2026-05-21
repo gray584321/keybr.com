@@ -12,6 +12,7 @@ import { DrillEvents } from "./event-source-drill.ts";
 import { LetterEvents } from "./event-source-letter.ts";
 import { MicroBreakEvents } from "./event-source-micro-break.ts";
 import { PlateauEvents } from "./event-source-plateau.ts";
+import { TensionEvents } from "./event-source-tension.ts";
 import { TopScoreEvents } from "./event-source-top-score.ts";
 import { TopSpeedEvents } from "./event-source-top-speed.ts";
 import {
@@ -29,6 +30,14 @@ export class Progress {
   readonly #dailyGoal: MutableDailyGoal;
   readonly #events: LessonEventSource;
 
+  /**
+   * Externally-installed callback (Controller wires this to the DwellMeter)
+   * that returns the current tension ratio, or null when unavailable.
+   * Defaulting to a null-returning function keeps TensionEvents quiet when
+   * the meter has not been set up yet.
+   */
+  getTensionRatio: () => number | null = () => null;
+
   constructor(settings: Settings, lesson: Lesson) {
     this.#settings = settings;
     this.#lesson = lesson;
@@ -44,6 +53,7 @@ export class Progress {
     const dailyGoal = new DailyGoalEvents(this.#dailyGoal);
     const microBreak = new MicroBreakEvents();
     const drill = new DrillEvents(this.#settings);
+    const tension = new TensionEvents(() => this.getTensionRatio());
     const plateau = new PlateauEvents(
       this.#keyStatsMap,
       new Target(this.#settings),
@@ -58,6 +68,7 @@ export class Progress {
         dailyGoal.append(result, listener);
         microBreak.append(result, listener);
         drill.append(result, listener);
+        tension.append(result, listener);
         plateau.append(result, listener);
       }
     })();

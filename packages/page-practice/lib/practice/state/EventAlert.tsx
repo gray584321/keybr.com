@@ -65,6 +65,15 @@ export function EventAlert({ event }: { readonly event: LessonEvent }) {
           />
         </Award>
       );
+    case "tension":
+      return (
+        <Award icon={<DailyGoalIcon />}>
+          <FormattedMessage
+            id="t_ev_Tension"
+            defaultMessage="Your keystrokes are getting heavy — relax your fingers, shake out your hands."
+          />
+        </Award>
+      );
   }
 }
 

@@ -22,7 +22,16 @@ export type TelemetryEvent =
   | { type: "drill_complete"; sessionMinutes: number }
   | { type: "daily_goal_completed"; goalMinutes: number; actualMinutes: number }
   | { type: "sfb_heatmap_viewed"; sfbCount: number }
-  | { type: "lesson_generated_timing"; lessonType: string; durationMs: number };
+  | { type: "lesson_generated_timing"; lessonType: string; durationMs: number }
+  | { type: "tension_detected"; tensionRatio: number }
+  | { type: "plateau_drill_offered" }
+  | { type: "plateau_drill_started" }
+  | { type: "warmup_completed"; bigramCount: number }
+  | { type: "rhythm_pacer_enabled" }
+  | { type: "prose_lesson_generated"; topic: string; bigramCount: number }
+  | { type: "prose_fallback_used"; reason: string }
+  | { type: "thompson_explore"; bigram: string }
+  | { type: "mobile_detected"; userAgent: string };
 
 export type TelemetrySink = (event: TelemetryEvent) => void;
 

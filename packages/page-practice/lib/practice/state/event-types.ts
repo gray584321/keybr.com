@@ -38,6 +38,11 @@ export type DrillCompleteEvent = {
   readonly sessionMinutes: number;
 };
 
+export type TensionEvent = {
+  readonly type: "tension";
+  readonly tensionRatio: number;
+};
+
 export type LessonEvent =
   | NewLetterEvent
   | TopSpeedEvent
@@ -45,7 +50,8 @@ export type LessonEvent =
   | DailyGoalEvent
   | MicroBreakEvent
   | DrillCompleteEvent
-  | PlateauEvent;
+  | PlateauEvent
+  | TensionEvent;
 
 export type LessonEventListener = (event: LessonEvent) => void;
 
