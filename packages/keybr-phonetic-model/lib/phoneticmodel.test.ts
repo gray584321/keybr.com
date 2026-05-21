@@ -102,3 +102,52 @@ test("appended words", () => {
   equal(model.nextWord(new Filter(null, null)), "hello");
   equal(model.nextWord(new Filter(null, null)), "hello");
 });
+
+test("bigram boost shifts the candidate distribution", () => {
+  // Build a model where after "a" the next character is uniformly random
+  // among {a, b, c, d}. Sampling 200 words then counting how often "ab"
+  // appears in the first two positions should jump substantially when
+  // we boost (a → b) vs. no boost.
+  const alphabet = [0x0020, 0x0061, 0x0062, 0x0063, 0x0064];
+  const builder = new TransitionTableBuilder(4, alphabet);
+  for (const l1 of alphabet) {
+    for (const l2 of alphabet) {
+      for (const l3 of alphabet) {
+        for (const l4 of alphabet) {
+          builder.set([l1, l2, l3, l4], 1);
+        }
+      }
+    }
+  }
+  const model = makePhoneticModel(Language.EN, builder.build());
+  const [a, b, c, d] = model.letters;
+
+  const baseline = new Filter([a, b, c, d], a);
+  const boosted = new Filter(
+    [a, b, c, d],
+    a,
+    new Map([[0x0061, new Map([[0x0062, 10]])]]),
+  );
+
+  function countAb(filter: Filter, n: number): number {
+    let hits = 0;
+    for (let i = 0; i < n; i++) {
+      const w = model.nextWord(filter);
+      for (let j = 0; j < w.length - 1; j++) {
+        if (w[j] === "a" && w[j + 1] === "b") hits += 1;
+      }
+    }
+    return hits;
+  }
+
+  const baselineHits = countAb(baseline, 300);
+  const boostedHits = countAb(boosted, 300);
+  // Boosted run should produce strictly more "ab" pairs than baseline.
+  // We use a loose threshold (1.3×) because the model is uniform-random
+  // and small-N stochastic noise is significant.
+  if (boostedHits <= baselineHits * 1.3) {
+    throw new Error(
+      `Boost did not increase frequency: baseline=${baselineHits}, boosted=${boostedHits}`,
+    );
+  }
+});

@@ -102,6 +102,16 @@ export function makePhoneticModel(
           if (codePoint === 0x0020) {
             // Boost the space character to generate shorter words.
             frequency = frequency * Math.pow(1.3, word.length);
+          } else if (word.length > 0) {
+            // Bigram boost: when this candidate completes a target pair
+            // (prev + this), multiply its frequency by the configured
+            // multiplier. Clamp at 10x so a rare bigram cannot completely
+            // dominate the sampling distribution.
+            const prev = word[word.length - 1];
+            const multiplier = filter.boostFor(prev, codePoint);
+            if (multiplier > 1) {
+              frequency = frequency * Math.min(multiplier, 10);
+            }
           }
           return { codePoint, frequency };
         });

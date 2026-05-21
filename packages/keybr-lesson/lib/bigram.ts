@@ -58,9 +58,16 @@ export class BigramLesson extends Lesson {
 
     const bigramFilter = new BigramFilter(targetBigrams, focusMode);
 
+    // Build a BigramBoost from the target list: for "any"/"every" modes
+    // the boost biases the generator toward producing these pairs; for
+    // "exclude" mode we don't want them, so we pass no boost.
+    const bigramBoost =
+      focusMode === "exclude" ? null : buildBigramBoost(targetBigrams);
+
     const filter = new Filter(
       lessonKeys.findIncludedKeys(),
       lessonKeys.findFocusedKey(),
+      bigramBoost,
     );
 
     const minBigrams = this.settings.get(lessonProps.bigram.minBigrams);
@@ -172,4 +179,28 @@ function normalizeTargetBigramMode(value: string): TargetBigramMode {
   return TARGET_BIGRAM_MODES.includes(value as TargetBigramMode)
     ? (value as TargetBigramMode)
     : "common";
+}
+
+/**
+ * Convert a list of two-character bigrams into a BigramBoost map suitable
+ * for `Filter`. Default multiplier of 4× — high enough to meaningfully
+ * shift the sampling distribution, low enough to keep generated text
+ * looking natural.
+ */
+function buildBigramBoost(
+  bigrams: readonly string[],
+): Map<CodePoint, Map<CodePoint, number>> {
+  const boost = new Map<CodePoint, Map<CodePoint, number>>();
+  for (const pair of bigrams) {
+    if (pair.length !== 2) continue;
+    const first = pair.charCodeAt(0);
+    const second = pair.charCodeAt(1);
+    let row = boost.get(first);
+    if (row == null) {
+      row = new Map();
+      boost.set(first, row);
+    }
+    row.set(second, 4);
+  }
+  return boost;
 }
