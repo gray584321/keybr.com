@@ -1,4 +1,5 @@
 import {
+  type BigramLesson,
   type BooksLesson,
   type CodeLesson,
   type CustomTextLesson,
@@ -14,6 +15,7 @@ import { type Settings, useSettings } from "@keybr/settings";
 import { Tab, TabList } from "@keybr/widget";
 import { type ReactNode } from "react";
 import { useIntl } from "react-intl";
+import { BigramLessonSettings } from "./lesson/BigramLessonSettings.tsx";
 import { BooksLessonSettings } from "./lesson/BooksLessonSettings.tsx";
 import { CodeLessonSettings } from "./lesson/CodeLessonSettings.tsx";
 import { CustomTextLessonSettings } from "./lesson/CustomTextLessonSettings.tsx";
@@ -72,6 +74,12 @@ export function LessonSettings(): ReactNode {
             defaultMessage: "Numbers",
           })}
         />
+        <Tab
+          label={formatMessage({
+            id: "t_Bigram_practice",
+            defaultMessage: "Bigram practice",
+          })}
+        />
       </TabList>
       <LessonLoader>
         {(lesson) => (
@@ -100,6 +108,8 @@ function tabBody(settings: Settings, lesson: Lesson): ReactNode {
       return <CodeLessonSettings lesson={lesson as CodeLesson} />;
     case LessonType.NUMBERS:
       return <NumbersLessonSettings lesson={lesson as NumbersLesson} />;
+    case LessonType.BIGRAM:
+      return <BigramLessonSettings lesson={lesson as BigramLesson} />;
     default:
       throw new Error();
   }
