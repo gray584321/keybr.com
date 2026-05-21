@@ -1,0 +1,48 @@
+.row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-block-start: 0.5rem;
+  padding-inline: 0.5rem;
+  opacity: 0.6;
+  font-size: 0.7rem;
+  user-select: none;
+}
+
+.dot {
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--text-color, currentColor);
+  animation-name: pulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.dotDimmed {
+  composes: dot;
+  background: var(--Chart-hist-m__color, currentColor);
+  opacity: 0.4;
+}
+
+.label {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}

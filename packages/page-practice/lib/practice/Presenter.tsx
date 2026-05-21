@@ -303,6 +303,8 @@ function NormalLayout({
         state={state}
         liveSpeed={state.currentSpeed}
         tensionRatio={state.tensionRatio}
+        cadenceBaselineMs={state.cadenceBaselineMs}
+        cadenceDeviation={state.cadenceDeviation}
       />
       <div id={names.textInput} className={styles.textInput_normal}>
         {textInput}
@@ -341,6 +343,8 @@ function CompactLayout({
         state={state}
         liveSpeed={state.currentSpeed}
         tensionRatio={state.tensionRatio}
+        cadenceBaselineMs={state.cadenceBaselineMs}
+        cadenceDeviation={state.cadenceDeviation}
       />
       <div id={names.textInput} className={styles.textInput_compact}>
         {textInput}

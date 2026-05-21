@@ -113,4 +113,8 @@ export const lessonProps = {
     1.15,
     { min: 1.0, max: 1.5 },
   ),
+  // Real-time rhythm coach: a visual pacer that pulses at the user's
+  // personal cadence baseline. Steinborn 2021 (PMC 8863758) showed
+  // pre-error rhythm acceleration is detectable from IKI variance.
+  rhythmPacerEnabled: booleanProp("lesson.rhythmPacerEnabled", false),
 } as const;

@@ -13,6 +13,7 @@ import { memo, type ReactNode, useEffect, useState } from "react";
 import { BigramPanel } from "./BigramPanel.tsx";
 import * as styles from "./Indicators.module.less";
 import { KeyExtendedDetails } from "./KeyExtendedDetails.tsx";
+import { RhythmPacer } from "./RhythmPacer.tsx";
 import { type LessonState } from "./state/index.ts";
 import { WarmupCard } from "./WarmupCard.tsx";
 
@@ -20,6 +21,8 @@ export const Indicators = memo(function Indicators({
   state,
   liveSpeed = null,
   tensionRatio = null,
+  cadenceBaselineMs = null,
+  cadenceDeviation = null,
 }: {
   readonly state: LessonState;
   /**
@@ -33,6 +36,14 @@ export const Indicators = memo(function Indicators({
    * Same memo-friendly explicit-prop pattern as liveSpeed.
    */
   readonly tensionRatio?: number | null;
+  /**
+   * Personal cadence baseline (ms per keystroke). For the rhythm pacer.
+   */
+  readonly cadenceBaselineMs?: number | null;
+  /**
+   * Cadence deviation in [-1, 1] from baseline. For the rhythm pacer.
+   */
+  readonly cadenceDeviation?: number | null;
 }): ReactNode {
   const { keyStatsMap, summaryStats, lessonKeys, streakList, dailyGoal } =
     state;
@@ -80,6 +91,10 @@ export const Indicators = memo(function Indicators({
           </span>
         )}
       </div>
+      <RhythmPacer
+        baselineMs={cadenceBaselineMs}
+        deviation={cadenceDeviation}
+      />
       <GaugeRow summaryStats={summaryStats} names={names} />
       <KeySetRow
         lessonKeys={lessonKeys}

@@ -118,6 +118,54 @@ export class LessonState {
   }
 
   /**
+   * Personal cadence baseline: the median inter-key-interval observed across
+   * the last 60 keystrokes (~half a typical lesson). Null when too few
+   * samples to be meaningful. Used as the comparison point for the rhythm
+   * coach's "you're accelerating beyond your stable pace" detection.
+   */
+  get cadenceBaselineMs(): number | null {
+    const steps = this.textInput.steps;
+    if (steps.length < 12) return null;
+    const window = steps.slice(-60);
+    const valid: number[] = [];
+    for (const s of window) {
+      if (s.timeToType > 0 && s.timeToType < 2000) {
+        valid.push(s.timeToType);
+      }
+    }
+    if (valid.length < 8) return null;
+    const sorted = valid.slice().sort((a, b) => a - b);
+    return sorted[Math.floor(sorted.length / 2)];
+  }
+
+  /**
+   * Z-score-like deviation of the most recent IKI from the cadence baseline,
+   * scaled by IQR. Positive = recent strokes faster than baseline (rhythm
+   * accelerating, pre-error risk per Steinborn 2021); negative = slower.
+   * Null when insufficient data.
+   */
+  get cadenceDeviation(): number | null {
+    const steps = this.textInput.steps;
+    if (steps.length < 12) return null;
+    const baseline = this.cadenceBaselineMs;
+    if (baseline == null) return null;
+    const recent = steps.slice(-5);
+    let sum = 0;
+    let n = 0;
+    for (const s of recent) {
+      if (s.timeToType > 0 && s.timeToType < 2000) {
+        sum += s.timeToType;
+        n += 1;
+      }
+    }
+    if (n === 0) return null;
+    const currentMean = sum / n;
+    // Positive when current is *faster* (smaller IKI). Bounded to [-1, 1].
+    const delta = (baseline - currentMean) / baseline;
+    return Math.max(-1, Math.min(1, delta));
+  }
+
+  /**
    * Current typing speed in characters per minute, computed from the
    * rolling window of the last 10 typed characters. Returns null when
    * there are fewer than 5 steps (signal too noisy to display).
