@@ -27,6 +27,11 @@ export const lessonProps = {
       min: 0,
       max: 1,
     }),
+    // When true, randomly rotate the focus across the top-3 weakest
+    // included keys each lesson instead of always picking the single
+    // weakest. Contextual-interference literature shows interleaving
+    // improves retention over blocked drilling.
+    multiFocus: booleanProp("lesson.guided.multiFocus", false),
   } as const,
   wordList: {
     wordListSize: numberProp("lesson.wordList.wordListSize", 1000, {

@@ -1,9 +1,15 @@
 import { type LessonKey } from "@keybr/lesson";
+import { type Letter } from "@keybr/phonetic-model";
 import { type Result } from "@keybr/result";
 
 export type NewLetterEvent = {
   readonly type: "new-letter";
   readonly lessonKey: LessonKey;
+};
+
+export type PlateauEvent = {
+  readonly type: "plateau";
+  readonly letter: Letter;
 };
 
 export type TopSpeedEvent = {
@@ -32,7 +38,8 @@ export type LessonEvent =
   | TopSpeedEvent
   | TopScoreEvent
   | DailyGoalEvent
-  | MicroBreakEvent;
+  | MicroBreakEvent
+  | PlateauEvent;
 
 export type LessonEventListener = (event: LessonEvent) => void;
 

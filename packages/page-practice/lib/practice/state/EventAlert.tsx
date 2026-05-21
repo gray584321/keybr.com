@@ -46,6 +46,15 @@ export function EventAlert({ event }: { readonly event: LessonEvent }) {
           />
         </Award>
       );
+    case "plateau":
+      return (
+        <Award icon={<TrophyIcon />}>
+          <FormattedMessage
+            id="t_ev_Plateau"
+            defaultMessage="Stuck on this key? Plateaus break with rest — sleep on it, or try a different lesson mode."
+          />
+        </Award>
+      );
   }
 }
 

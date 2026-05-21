@@ -119,7 +119,18 @@ export class GuidedLesson extends Lesson {
       .filter((key) => confidenceOf(key) < 1)
       .sort((a, b) => confidenceOf(a) - confidenceOf(b));
     if (weakestKeys.length > 0) {
-      lessonKeys.focus(weakestKeys[0].letter);
+      const multiFocus = this.settings.get(lessonProps.guided.multiFocus);
+      if (multiFocus && weakestKeys.length > 1) {
+        // Pick uniformly at random among the top-3 weakest. Filter only
+        // accepts one focusedCodePoint, so multi-key interleaving here
+        // happens across lessons (each lesson rotates to a different weak
+        // key) rather than within a lesson.
+        const pool = weakestKeys.slice(0, Math.min(3, weakestKeys.length));
+        const pick = pool[Math.floor(Lesson.rng() * pool.length)];
+        lessonKeys.focus(pick.letter);
+      } else {
+        lessonKeys.focus(weakestKeys[0].letter);
+      }
     }
 
     return lessonKeys;
