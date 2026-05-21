@@ -1,0 +1,86 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-block: 1rem;
+}
+
+.card {
+  flex: 1 1 12rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color, rgba(128, 128, 128, 0.3));
+  border-radius: 6px;
+  background: var(--card-bg, rgba(255, 255, 255, 0.02));
+}
+
+.label {
+  margin-block-end: 0.25rem;
+  opacity: 0.75;
+  font-size: 0.85rem;
+}
+
+.value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.headroom {
+  margin-block-start: 0.25rem;
+  color: var(--Chart-hist-h__color, inherit);
+  opacity: 0.85;
+  font-size: 0.8rem;
+}
+
+.lists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-block-end: 1rem;
+}
+
+.list {
+  flex: 1 1 12rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color, rgba(128, 128, 128, 0.3));
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.listTitle {
+  margin-block-end: 0.35rem;
+  opacity: 0.85;
+  font-weight: 600;
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.table tr {
+  border-block-end: 1px dotted rgba(128, 128, 128, 0.2);
+}
+
+.table tr:last-child {
+  border-block-end: none;
+}
+
+.letter {
+  padding: 0.2rem 0;
+  font-family: var(--monospace-font-family, monospace);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.numeric {
+  padding: 0.2rem 0;
+  opacity: 0.75;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.empty {
+  opacity: 0.45;
+  font-style: italic;
+}

@@ -18,6 +18,7 @@ import { KeySpeedHistogramSection } from "./profile/KeySpeedHistogramSection.tsx
 import { ProgressOverviewSection } from "./profile/ProgressOverviewSection.tsx";
 import { ResultGrouper } from "./profile/ResultGrouper.tsx";
 import { ShareProfileLink } from "./profile/ShareProfileLink.tsx";
+import { SkillTwinSection } from "./profile/SkillTwinSection.tsx";
 import { SpeedChartSection } from "./profile/SpeedChartSection.tsx";
 import { AllTimeSummary, TodaySummary } from "./profile/Summary.tsx";
 
@@ -49,6 +50,8 @@ function Content({ keyStatsMap }: { keyStatsMap: KeyStatsMap }) {
       <TodaySummary stats={dailyStatsMap.today.stats} />
 
       <AccuracyStreaksSection results={results} />
+
+      <SkillTwinSection keyStatsMap={keyStatsMap} />
 
       <HistogramsSection stats={stats} />
 
