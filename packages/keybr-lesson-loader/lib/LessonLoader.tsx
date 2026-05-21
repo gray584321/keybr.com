@@ -3,6 +3,7 @@ import { loadWordList } from "@keybr/content-words";
 import { catchError } from "@keybr/debug";
 import { KeyboardOptions, useKeyboard } from "@keybr/keyboard";
 import {
+  BigramLesson,
   BooksLesson,
   CodeLesson,
   CustomTextLesson,
@@ -108,6 +109,14 @@ function useLoader(model: PhoneticModel): Lesson | null {
         case LessonType.NUMBERS: {
           if (!didCancel) {
             setResult(new NumbersLesson(settings, keyboard, model));
+          }
+          break;
+        }
+        case LessonType.BIGRAM: {
+          if (!didCancel) {
+            // BigramStatsMap is empty until Sprint 5 wires session data
+            // through; BigramLesson falls back to common-bigrams in that case.
+            setResult(new BigramLesson(settings, keyboard, model));
           }
           break;
         }

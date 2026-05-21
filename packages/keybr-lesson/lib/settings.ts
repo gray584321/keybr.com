@@ -54,6 +54,20 @@ export const lessonProps = {
     syntax: itemProp("lesson.code.syntax", Syntax.ALL, Syntax.HTML),
     flags: flagsProp("lesson.code.flags", Syntax.FLAGS),
   } as const,
+  bigram: {
+    // "any" | "every" | "exclude" — see BigramFilter.
+    focusMode: stringProp("lesson.bigram.focusMode", "any", { maxLength: 16 }),
+    // "slowest" | "manual" | "same-finger" | "common" — see BigramLesson.
+    targetBigramMode: stringProp("lesson.bigram.targetBigramMode", "common", {
+      maxLength: 16,
+    }),
+    minBigrams: numberProp("lesson.bigram.minBigrams", 0, { min: 0, max: 10 }),
+    maxBigrams: numberProp("lesson.bigram.maxBigrams", 2, { min: 0, max: 20 }),
+    // Comma-separated list of bigrams used when targetBigramMode is "manual".
+    manualBigrams: stringProp("lesson.bigram.manualBigrams", "", {
+      maxLength: 200,
+    }),
+  } as const,
   capitals: numberProp("lesson.capitals", 0, { min: 0, max: 1 }),
   punctuators: numberProp("lesson.punctuators", 0, { min: 0, max: 1 }),
   repeatWords: numberProp("lesson.repeatWords", 1, { min: 1, max: 10 }),

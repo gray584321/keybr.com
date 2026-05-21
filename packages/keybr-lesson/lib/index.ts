@@ -1,3 +1,4 @@
+export * from "./bigram.ts";
 export * from "./books.ts";
 export * from "./code.ts";
 export * from "./customtext.ts";
@@ -11,4 +12,6 @@ export * from "./lessontype.ts";
 export * from "./numbers.ts";
 export * from "./settings.ts";
 export * from "./target.ts";
+export * from "./text/bigramfilter.ts";
+export * from "./text/bigramwords.ts";
 export * from "./wordlist.ts";
