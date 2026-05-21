@@ -6,6 +6,7 @@ import {
   type Result,
 } from "@keybr/result";
 import { type Step } from "@keybr/textinput";
+import { isMobileContext } from "@keybr/textinput-events";
 import { type HasCodePoint } from "@keybr/unicode";
 
 export type LastLesson = {
@@ -36,6 +37,9 @@ export function makeLastLesson(
   for (let i = 0; i < steps.length - 1; i++) {
     hits2.add(steps[i].codePoint, steps[i + 1].codePoint, 1);
   }
-  const bigramStats = makeBigramStatsMap(steps);
+  // Skip bigram timing collection on mobile / soft-keyboard contexts —
+  // OS-quantized timestamps and predictive-text events make per-bigram
+  // IKI unreliable on those devices (see DwellMeter / mobile.ts).
+  const bigramStats = isMobileContext() ? new Map() : makeBigramStatsMap(steps);
   return { result, hits, misses, hits2, misses2, bigramStats };
 }

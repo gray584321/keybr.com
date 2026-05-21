@@ -1,5 +1,6 @@
 export * from "./dwellmeter.ts";
 export * from "./emulation.ts";
+export * from "./mobile.ts";
 export * from "./modifiers.ts";
 export * from "./TextEvents.tsx";
 export * from "./types.ts";
