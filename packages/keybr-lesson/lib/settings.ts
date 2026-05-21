@@ -20,6 +20,13 @@ export const lessonProps = {
       max: 1,
     }),
     recoverKeys: booleanProp("lesson.guided.recoverKeys", false),
+    // New keys (samples.length < 5) require this minimum accuracy on their
+    // recent samples to unlock, in addition to meeting the speed target.
+    // 0 disables the floor entirely.
+    minAccuracy: numberProp("lesson.guided.minAccuracy", 0.8, {
+      min: 0,
+      max: 1,
+    }),
   } as const,
   wordList: {
     wordListSize: numberProp("lesson.wordList.wordListSize", 1000, {
@@ -71,6 +78,8 @@ export const lessonProps = {
   capitals: numberProp("lesson.capitals", 0, { min: 0, max: 1 }),
   punctuators: numberProp("lesson.punctuators", 0, { min: 0, max: 1 }),
   repeatWords: numberProp("lesson.repeatWords", 1, { min: 1, max: 10 }),
-  targetSpeed: numberProp("lesson.targetSpeed", 175, { min: 75, max: 750 }),
+  // Default lowered from 175 → 120 CPM (≈24 WPM) to address beginner drop-off.
+  // Existing users keep their stored value via numberProp.fromJson.
+  targetSpeed: numberProp("lesson.targetSpeed", 120, { min: 75, max: 750 }),
   dailyGoal: numberProp("lesson.dailyGoal", 30, { min: 0, max: 120 }),
 } as const;

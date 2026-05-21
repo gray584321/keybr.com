@@ -2,7 +2,7 @@ import { type WordList } from "@keybr/content";
 import { type Keyboard } from "@keybr/keyboard";
 import { Filter, Letter, type PhoneticModel } from "@keybr/phonetic-model";
 import { type RNGStream } from "@keybr/rand";
-import { type KeyStatsMap } from "@keybr/result";
+import { type KeySample, type KeyStatsMap } from "@keybr/result";
 import { type Settings } from "@keybr/settings";
 import { Dictionary, filterWordList } from "./dictionary.ts";
 import { LessonKey, LessonKeys } from "./key.ts";
@@ -16,6 +16,10 @@ import {
   randomWords,
   uniqueWords,
 } from "./text/words.ts";
+
+// New letters with fewer than this many samples must also pass the
+// minAccuracy floor before they are unlocked.
+const NEW_KEY_SAMPLE_THRESHOLD = 5;
 
 export class GuidedLesson extends Lesson {
   readonly dictionary: Dictionary;
@@ -41,6 +45,7 @@ export class GuidedLesson extends Lesson {
   override update(keyStatsMap: KeyStatsMap) {
     const alphabetSize = this.settings.get(lessonProps.guided.alphabetSize);
     const recoverKeys = this.settings.get(lessonProps.guided.recoverKeys);
+    const minAccuracy = this.settings.get(lessonProps.guided.minAccuracy);
 
     const letters = this.#getLetters();
 
@@ -71,21 +76,34 @@ export class GuidedLesson extends Lesson {
 
       if ((lessonKey.bestConfidence ?? 0) >= 1) {
         // Must include all confident keys.
+        // Note: established keys (bestConfidence ever ≥ 1) are NOT relocked
+        // by the accuracy floor — that would disrupt existing users.
         lessonKeys.include(lessonKey.letter);
         continue;
       }
 
+      // Accuracy gate: only applied to keys with few samples (i.e. newly
+      // unlocked candidates), so already-confident-but-inaccurate letters
+      // from before this gate existed are grandfathered.
+      const meetsAccuracy = passesAccuracyFloor(lessonKey.samples, minAccuracy);
+
       if (recoverKeys) {
-        if (includedKeys.every((key) => (key.confidence ?? 0) >= 1)) {
+        if (
+          includedKeys.every((key) => (key.confidence ?? 0) >= 1) &&
+          meetsAccuracy
+        ) {
           // Include a new key only when all the previous keys
-          // are now above the target speed.
+          // are now above the target speed AND this key meets accuracy.
           lessonKeys.include(lessonKey.letter);
           continue;
         }
       } else {
-        if (includedKeys.every((key) => (key.bestConfidence ?? 0) >= 1)) {
+        if (
+          includedKeys.every((key) => (key.bestConfidence ?? 0) >= 1) &&
+          meetsAccuracy
+        ) {
           // Include a new key only when all the previous keys
-          // were once above the target speed.
+          // were once above the target speed AND this key meets accuracy.
           lessonKeys.include(lessonKey.letter);
           continue;
         }
@@ -159,4 +177,32 @@ export class GuidedLesson extends Lesson {
     }
     return pseudoWords;
   }
+}
+
+/**
+ * Return true when the key passes the accuracy floor — meaning either
+ * (a) it has enough history that it's no longer "newly considered"
+ * (grandfathered), or (b) its recent miss rate is at or below
+ * `1 - minAccuracy`.
+ *
+ * Pass minAccuracy = 0 to disable the floor entirely.
+ */
+function passesAccuracyFloor(
+  samples: readonly KeySample[],
+  minAccuracy: number,
+): boolean {
+  if (minAccuracy <= 0) return true;
+  if (samples.length >= NEW_KEY_SAMPLE_THRESHOLD) return true;
+  if (samples.length === 0) return true; // no data; defer to speed gate
+
+  let hits = 0;
+  let misses = 0;
+  for (const s of samples) {
+    hits += s.hitCount;
+    misses += s.missCount;
+  }
+  const total = hits + misses;
+  if (total === 0) return true;
+  const missRate = misses / total;
+  return missRate <= 1 - minAccuracy;
 }

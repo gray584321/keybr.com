@@ -684,4 +684,176 @@ describe("unlock keys", () => {
       });
     });
   });
+
+  describe("accuracy floor on new key unlock", () => {
+    // A "new" key has fewer than 5 samples. The floor checks recent miss
+    // rate against (1 - minAccuracy). Established keys (samples >= 5) are
+    // grandfathered so existing users don't see letters relock.
+
+    const inaccurateSamples = [
+      // 4 samples, 50% miss rate each — fails default 0.8 floor (20% miss max).
+      {
+        index: 0,
+        timeStamp: 0,
+        hitCount: 1,
+        missCount: 1,
+        timeToType: 500,
+        filteredTimeToType: 500,
+      },
+      {
+        index: 1,
+        timeStamp: 0,
+        hitCount: 1,
+        missCount: 1,
+        timeToType: 500,
+        filteredTimeToType: 500,
+      },
+      {
+        index: 2,
+        timeStamp: 0,
+        hitCount: 1,
+        missCount: 1,
+        timeToType: 500,
+        filteredTimeToType: 500,
+      },
+      {
+        index: 3,
+        timeStamp: 0,
+        hitCount: 1,
+        missCount: 1,
+        timeToType: 500,
+        filteredTimeToType: 500,
+      },
+    ];
+
+    it("blocks unlock of a new key with high miss rate", () => {
+      const { settings, lesson } = recoverOff();
+
+      // First 6 mastered. Letters 7-10 all have bestConfidence < 1 and
+      // high-miss-rate samples. Without the floor any of them would unlock
+      // (and the first such unlock would become the new focus key).
+      // With the floor active (default 0.8) none of them pass, so the
+      // included set stays at the first six mastered keys.
+      equal(
+        printLessonKeys(
+          lesson.update(
+            fakeKeyStatsMap(settings, [
+              [letter1, 1, 1],
+              [letter2, 1, 1],
+              [letter3, 1, 1],
+              [letter4, 1, 1],
+              [letter5, 1, 1],
+              [letter6, 1, 1],
+              [letter7, 0.5, 0.5, inaccurateSamples],
+              [letter8, 0.5, 0.5, inaccurateSamples],
+              [letter9, 0.5, 0.5, inaccurateSamples],
+              [letter10, 0.5, 0.5, inaccurateSamples],
+            ]),
+          ),
+        ),
+        "ABCDEF",
+      );
+    });
+
+    it("allows unlock when minAccuracy is set to 0 (floor disabled)", () => {
+      const settings = new Settings().set(lessonProps.guided.minAccuracy, 0);
+      const lesson = new GuidedLesson(settings, keyboard, model, []);
+
+      equal(
+        printLessonKeys(
+          lesson.update(
+            fakeKeyStatsMap(settings, [
+              [letter1, 1, 1],
+              [letter2, 1, 1],
+              [letter3, 1, 1],
+              [letter4, 1, 1],
+              [letter5, 1, 1],
+              [letter6, 1, 1],
+              [letter7, 0.5, 0.5, inaccurateSamples],
+              [letter8, null, null],
+              [letter9, null, null],
+              [letter10, null, null],
+            ]),
+          ),
+        ),
+        "ABCDEF[G]",
+      );
+    });
+
+    it("allows unlock of a new key with high accuracy", () => {
+      const { settings, lesson } = recoverOff();
+      const accurateSamples = [
+        {
+          index: 0,
+          timeStamp: 0,
+          hitCount: 10,
+          missCount: 0,
+          timeToType: 500,
+          filteredTimeToType: 500,
+        },
+        {
+          index: 1,
+          timeStamp: 0,
+          hitCount: 10,
+          missCount: 0,
+          timeToType: 500,
+          filteredTimeToType: 500,
+        },
+      ];
+
+      equal(
+        printLessonKeys(
+          lesson.update(
+            fakeKeyStatsMap(settings, [
+              [letter1, 1, 1],
+              [letter2, 1, 1],
+              [letter3, 1, 1],
+              [letter4, 1, 1],
+              [letter5, 1, 1],
+              [letter6, 1, 1],
+              [letter7, 0.5, 0.5, accurateSamples],
+              [letter8, null, null],
+              [letter9, null, null],
+              [letter10, null, null],
+            ]),
+          ),
+        ),
+        "ABCDEF[G]",
+      );
+    });
+
+    it("grandfathers established keys with >= 5 samples regardless of miss rate", () => {
+      const { settings, lesson } = recoverOff();
+      const manyInaccurateSamples = Array.from({ length: 8 }, (_, i) => ({
+        index: i,
+        timeStamp: 0,
+        hitCount: 1,
+        missCount: 1,
+        timeToType: 500,
+        filteredTimeToType: 500,
+      }));
+
+      // Letter7 has lots of history (8 samples) — even with 50% miss rate,
+      // the floor doesn't apply, so it unlocks as before.
+      equal(
+        printLessonKeys(
+          lesson.update(
+            fakeKeyStatsMap(settings, [
+              [letter1, 1, 1],
+              [letter2, 1, 1],
+              [letter3, 1, 1],
+              [letter4, 1, 1],
+              [letter5, 1, 1],
+              [letter6, 1, 1],
+              [letter7, 0.5, 0.5, manyInaccurateSamples],
+              [letter8, null, null],
+              [letter9, null, null],
+              [letter10, null, null],
+            ]),
+          ),
+        ),
+        "ABCDEF[G]",
+      );
+    });
+  });
 });
