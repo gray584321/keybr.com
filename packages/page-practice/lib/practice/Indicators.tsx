@@ -15,51 +15,70 @@ import { KeyExtendedDetails } from "./KeyExtendedDetails.tsx";
 import { type LessonState } from "./state/index.ts";
 
 export const Indicators = memo(function Indicators({
-  state: { keyStatsMap, summaryStats, lessonKeys, streakList, dailyGoal },
+  state,
+  liveSpeed = null,
 }: {
   readonly state: LessonState;
+  /**
+   * Current typing speed in CPM, passed by the parent on every keystroke.
+   * Indicators is memo'd on `state` (a stable ref), so this explicit prop
+   * is needed for live updates to propagate.
+   */
+  readonly liveSpeed?: number | null;
 }): ReactNode {
+  const { keyStatsMap, summaryStats, lessonKeys, streakList, dailyGoal } =
+    state;
   type State = Readonly<
     | { type: "hidden" }
     | { type: "visible-in"; key: LessonKey; elem: Element }
     | { type: "visible"; key: LessonKey; elem: Element }
     | { type: "visible-out"; key: LessonKey; elem: Element }
   >;
-  const [state, setState] = useState<State>({ type: "hidden" });
+  const [hover, setHover] = useState<State>({ type: "hidden" });
   useEffect(() => {
     const tasks = new Tasks();
-    switch (state.type) {
+    switch (hover.type) {
       case "visible-in":
         tasks.delayed(300, () => {
-          setState({ ...state, type: "visible" });
+          setHover({ ...hover, type: "visible" });
         });
         break;
       case "visible-out":
         tasks.delayed(300, () => {
-          setState({ type: "hidden" });
+          setHover({ type: "hidden" });
         });
         break;
     }
     return () => {
       tasks.cancelAll();
     };
-  }, [state]);
+  }, [hover]);
   return (
     <div id={names.indicators} className={styles.indicators}>
+      <div
+        className={
+          liveSpeed != null
+            ? styles.liveSpeed
+            : `${styles.liveSpeed} ${styles.liveSpeedDim}`
+        }
+        aria-live="off"
+      >
+        {liveSpeed != null ? `${liveSpeed} CPM` : "— CPM"}
+      </div>
       <GaugeRow summaryStats={summaryStats} names={names} />
       <KeySetRow
         lessonKeys={lessonKeys}
         names={names}
         onKeyHoverIn={(key, elem) => {
-          setState({ type: "visible-in", key, elem });
+          setHover({ type: "visible-in", key, elem });
         }}
         onKeyHoverOut={() => {
-          switch (state.type) {
+          switch (hover.type) {
             case "visible-in":
-              setState({ type: "hidden" });
+              setHover({ type: "hidden" });
               break;
             case "visible":
-              setState({ ...state, type: "visible-out" });
+              setHover({ ...hover, type: "visible-out" });
               break;
           }
         }}
@@ -69,20 +88,20 @@ export const Indicators = memo(function Indicators({
       {dailyGoal.goal > 0 && (
         <DailyGoalRow dailyGoal={dailyGoal} names={names} />
       )}
-      {(state.type === "visible" || state.type === "visible-out") && (
+      {(hover.type === "visible" || hover.type === "visible-out") && (
         <Portal>
           <Popup
-            anchor={state.elem}
+            anchor={hover.elem}
             onMouseEnter={() => {
-              setState({ ...state, type: "visible" });
+              setHover({ ...hover, type: "visible" });
             }}
             onMouseLeave={() => {
-              setState({ ...state, type: "visible-out" });
+              setHover({ ...hover, type: "visible-out" });
             }}
           >
             <KeyExtendedDetails
-              lessonKey={state.key}
-              keyStats={keyStatsMap.get(state.key.letter)}
+              lessonKey={hover.key}
+              keyStats={keyStatsMap.get(hover.key.letter)}
             />
           </Popup>
         </Portal>

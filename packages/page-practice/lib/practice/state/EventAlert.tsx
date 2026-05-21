@@ -36,6 +36,16 @@ export function EventAlert({ event }: { readonly event: LessonEvent }) {
           />
         </Award>
       );
+    case "micro-break":
+      return (
+        <Award icon={<DailyGoalIcon />}>
+          <FormattedMessage
+            id="t_ev_Micro_break"
+            defaultMessage="{minutes} minutes of typing — take a 30-second break to keep accuracy up."
+            values={{ minutes: event.sessionMinutes }}
+          />
+        </Award>
+      );
   }
 }
 

@@ -22,11 +22,17 @@ export type DailyGoalEvent = {
   readonly type: "daily-goal";
 };
 
+export type MicroBreakEvent = {
+  readonly type: "micro-break";
+  readonly sessionMinutes: number;
+};
+
 export type LessonEvent =
   | NewLetterEvent
   | TopSpeedEvent
   | TopScoreEvent
-  | DailyGoalEvent;
+  | DailyGoalEvent
+  | MicroBreakEvent;
 
 export type LessonEventListener = (event: LessonEvent) => void;
 

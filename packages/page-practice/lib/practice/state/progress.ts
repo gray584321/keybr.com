@@ -9,6 +9,7 @@ import {
 import { type Settings } from "@keybr/settings";
 import { DailyGoalEvents } from "./event-source-daily-goal.ts";
 import { LetterEvents } from "./event-source-letter.ts";
+import { MicroBreakEvents } from "./event-source-micro-break.ts";
 import { TopScoreEvents } from "./event-source-top-score.ts";
 import { TopSpeedEvents } from "./event-source-top-speed.ts";
 import {
@@ -39,12 +40,14 @@ export class Progress {
     const topSpeed = new TopSpeedEvents();
     const topScore = new TopScoreEvents();
     const dailyGoal = new DailyGoalEvents(this.#dailyGoal);
+    const microBreak = new MicroBreakEvents();
     this.#events = new (class implements LessonEventSource {
       append(result: Result, listener: LessonEventListener): void {
         letter.append(result, listener);
         topSpeed.append(result, listener);
         topScore.append(result, listener);
         dailyGoal.append(result, listener);
+        microBreak.append(result, listener);
       }
     })();
   }

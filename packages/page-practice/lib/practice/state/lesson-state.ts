@@ -96,4 +96,27 @@ export class LessonState {
       makeStats(this.textInput.steps),
     );
   }
+
+  /**
+   * Current typing speed in characters per minute, computed from the
+   * rolling window of the last 10 typed characters. Returns null when
+   * there are fewer than 5 steps (signal too noisy to display).
+   */
+  get currentSpeed(): number | null {
+    const steps = this.textInput.steps;
+    if (steps.length < 5) return null;
+    const windowSize = 10;
+    const window = steps.slice(-windowSize);
+    let totalTime = 0;
+    let count = 0;
+    for (const s of window) {
+      if (s.timeToType > 0) {
+        totalTime += s.timeToType;
+        count += 1;
+      }
+    }
+    if (count === 0 || totalTime === 0) return null;
+    // CPM = chars per minute. timeToType is ms per char.
+    return Math.round((count / totalTime) * 60_000);
+  }
 }

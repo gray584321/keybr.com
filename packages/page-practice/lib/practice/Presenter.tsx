@@ -299,7 +299,7 @@ function NormalLayout({
 }) {
   return (
     <Screen>
-      <Indicators state={state} />
+      <Indicators state={state} liveSpeed={state.currentSpeed} />
       <div id={names.textInput} className={styles.textInput_normal}>
         {textInput}
       </div>
@@ -333,7 +333,7 @@ function CompactLayout({
 }) {
   return (
     <Screen>
-      <Indicators state={state} />
+      <Indicators state={state} liveSpeed={state.currentSpeed} />
       <div id={names.textInput} className={styles.textInput_compact}>
         {textInput}
       </div>
