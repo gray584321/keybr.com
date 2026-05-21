@@ -10,6 +10,7 @@ export * from "./learningsession.ts";
 export * from "./lesson.ts";
 export * from "./lessontype.ts";
 export * from "./numbers.ts";
+export * from "./prose.ts";
 export * from "./settings.ts";
 export * from "./target.ts";
 export * from "./text/bigramfilter.ts";

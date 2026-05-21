@@ -80,6 +80,12 @@ export function LessonSettings(): ReactNode {
             defaultMessage: "Bigram practice",
           })}
         />
+        <Tab
+          label={formatMessage({
+            id: "t_Real_prose",
+            defaultMessage: "Real prose",
+          })}
+        />
       </TabList>
       <LessonLoader>
         {(lesson) => (
@@ -110,7 +116,21 @@ function tabBody(settings: Settings, lesson: Lesson): ReactNode {
       return <NumbersLessonSettings lesson={lesson as NumbersLesson} />;
     case LessonType.BIGRAM:
       return <BigramLessonSettings lesson={lesson as BigramLesson} />;
+    case LessonType.PROSE:
+      return <ProseLessonSettings />;
     default:
       throw new Error();
   }
+}
+
+function ProseLessonSettings() {
+  return (
+    <div style={{ padding: "1rem 0" }}>
+      <p>
+        Real prose passages chosen from a curated public-domain corpus, ranked
+        by overlap with your slowest bigrams. The first typing-trainer mode that
+        combines adaptive weakness targeting with coherent natural text.
+      </p>
+    </div>
+  );
 }

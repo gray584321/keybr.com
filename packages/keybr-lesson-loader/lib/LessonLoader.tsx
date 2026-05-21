@@ -12,6 +12,7 @@ import {
   lessonProps,
   LessonType,
   NumbersLesson,
+  ProseLesson,
   WordListLesson,
 } from "@keybr/lesson";
 import { LoadingProgress } from "@keybr/pages-shared";
@@ -117,6 +118,12 @@ function useLoader(model: PhoneticModel): Lesson | null {
             // BigramStatsMap is empty until Sprint 5 wires session data
             // through; BigramLesson falls back to common-bigrams in that case.
             setResult(new BigramLesson(settings, keyboard, model));
+          }
+          break;
+        }
+        case LessonType.PROSE: {
+          if (!didCancel) {
+            setResult(new ProseLesson(settings, keyboard, model));
           }
           break;
         }
