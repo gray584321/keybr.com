@@ -1,6 +1,7 @@
 import { type Lesson } from "@keybr/lesson";
 import { type Letter } from "@keybr/phonetic-model";
 import { type KeyStatsMap, type Result } from "@keybr/result";
+import { emit } from "@keybr/telemetry";
 import {
   type LessonEventListener,
   type LessonEventSource,
@@ -29,6 +30,11 @@ export class LetterEvents implements LessonEventSource {
       if (!this.#included.has(lessonKey.letter)) {
         this.#included.add(lessonKey.letter);
         listener({ type: "new-letter", lessonKey });
+        emit({
+          type: "letter_unlocked",
+          alphabetSize: this.#included.size,
+          accuracyAtUnlock: result.accuracy,
+        });
       }
     }
   }

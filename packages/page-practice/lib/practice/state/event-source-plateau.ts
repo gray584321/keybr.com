@@ -1,6 +1,7 @@
 import { LearningRate, type LessonKeys, type Target } from "@keybr/lesson";
 import { type Letter } from "@keybr/phonetic-model";
 import { type KeyStats, type KeyStatsMap, type Result } from "@keybr/result";
+import { emit } from "@keybr/telemetry";
 import {
   type LessonEventListener,
   type LessonEventSource,
@@ -76,8 +77,10 @@ export class PlateauEvents implements LessonEventSource {
       const now = result.timeStamp;
       if (now - this.#lastToastAt >= TOAST_COOLDOWN_MS) {
         this.#lastToastAt = now;
+        const consecutiveStalls = this.#consecutiveStalls;
         this.#consecutiveStalls = 0;
         listener({ type: "plateau", letter: focused });
+        emit({ type: "plateau_toast_shown", consecutiveStalls });
       }
     }
   }

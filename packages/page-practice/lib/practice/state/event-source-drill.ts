@@ -1,6 +1,7 @@
 import { lessonProps } from "@keybr/lesson";
 import { type Result } from "@keybr/result";
 import { type Settings } from "@keybr/settings";
+import { emit } from "@keybr/telemetry";
 import {
   type LessonEventListener,
   type LessonEventSource,
@@ -28,10 +29,9 @@ export class DrillEvents implements LessonEventSource {
     this.#sessionMs += result.time;
     if (this.#sessionMs >= this.#limitMs) {
       this.#fired = true;
-      listener({
-        type: "drill-complete",
-        sessionMinutes: Math.round(this.#sessionMs / 60_000),
-      });
+      const sessionMinutes = Math.round(this.#sessionMs / 60_000);
+      listener({ type: "drill-complete", sessionMinutes });
+      emit({ type: "drill_complete", sessionMinutes });
     }
   }
 }

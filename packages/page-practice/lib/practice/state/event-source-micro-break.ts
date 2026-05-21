@@ -1,4 +1,5 @@
 import { type Result } from "@keybr/result";
+import { emit } from "@keybr/telemetry";
 import {
   type LessonEventListener,
   type LessonEventSource,
@@ -28,10 +29,9 @@ export class MicroBreakEvents implements LessonEventSource {
     this.#sessionMs += result.time;
     if (this.#sessionMs - this.#lastBreakMs >= this.#intervalMs) {
       this.#lastBreakMs = this.#sessionMs;
-      listener({
-        type: "micro-break",
-        sessionMinutes: Math.round(this.#sessionMs / 60000),
-      });
+      const sessionMinutes = Math.round(this.#sessionMs / 60000);
+      listener({ type: "micro-break", sessionMinutes });
+      emit({ type: "micro_break_prompted", sessionMinutes });
     }
   }
 }
