@@ -113,20 +113,38 @@ export class BigramLesson extends Lesson {
   }
 
   private findSlowestBigrams(count: number): string[] {
-    const entries = [...this.bigramStatsMap.entries()]
-      .filter(([, stats]) => stats.bestTimeToType != null && stats.hitCount > 0)
-      .map(([bigram, stats]) => ({
-        bigram,
-        ratio:
+    // Thompson-sampling-style exploration: instead of picking the top-N
+    // deterministically by ratio, we score each candidate as
+    //   ratio + exploration_bonus
+    // where the bonus is proportional to 1 / sqrt(hitCount + 1) so bigrams
+    // with very few samples occasionally rotate into the focus set even
+    // when their measured ratio is low. The bonus shrinks toward zero as
+    // hitCount grows, so confirmed weaknesses still dominate at scale.
+    //
+    // This is the lightweight Thompson-sampling layer described in the
+    // adaptive-algorithms research: combines a known weakness signal with
+    // principled exploration of the unknown.
+    const entries = [...this.bigramStatsMap.entries()].filter(
+      ([, stats]) => stats.bestTimeToType != null && stats.hitCount > 0,
+    );
+    if (entries.length === 0) return [...COMMON_ENGLISH_BIGRAMS];
+
+    const sampled = entries
+      .map(([bigram, stats]) => {
+        const ratio =
           stats.timeToType != null
             ? stats.timeToType / stats.bestTimeToType!
-            : Infinity,
-      }))
-      .sort((a, b) => b.ratio - a.ratio)
+            : 1;
+        // Normal-ish noise scaled by 1/sqrt(hitCount + 1).
+        const exploration =
+          (Math.random() - 0.5) / Math.sqrt(stats.hitCount + 1);
+        return { bigram, score: ratio + exploration };
+      })
+      .sort((a, b) => b.score - a.score)
       .slice(0, count)
       .map((e) => e.bigram);
 
-    return entries.length > 0 ? entries : [...COMMON_ENGLISH_BIGRAMS];
+    return sampled.length > 0 ? sampled : [...COMMON_ENGLISH_BIGRAMS];
   }
 
   private getManualBigrams(): string[] {
