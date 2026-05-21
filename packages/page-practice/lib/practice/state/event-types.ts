@@ -33,12 +33,18 @@ export type MicroBreakEvent = {
   readonly sessionMinutes: number;
 };
 
+export type DrillCompleteEvent = {
+  readonly type: "drill-complete";
+  readonly sessionMinutes: number;
+};
+
 export type LessonEvent =
   | NewLetterEvent
   | TopSpeedEvent
   | TopScoreEvent
   | DailyGoalEvent
   | MicroBreakEvent
+  | DrillCompleteEvent
   | PlateauEvent;
 
 export type LessonEventListener = (event: LessonEvent) => void;

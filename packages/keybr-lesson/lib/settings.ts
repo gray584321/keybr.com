@@ -87,4 +87,19 @@ export const lessonProps = {
   // Existing users keep their stored value via numberProp.fromJson.
   targetSpeed: numberProp("lesson.targetSpeed", 120, { min: 75, max: 750 }),
   dailyGoal: numberProp("lesson.dailyGoal", 30, { min: 0, max: 120 }),
+  // When > 0, lessons are sized to fit roughly this many minutes of typing
+  // and the practice loop ends the session early once the total active
+  // typing time reaches the limit. 0 disables the cap (default behavior).
+  shortDrillMinutes: numberProp("lesson.shortDrillMinutes", 0, {
+    min: 0,
+    max: 60,
+  }),
+  // Reserved for the days-in-a-row streak freeze feature. Counts tokens the
+  // user may spend to preserve a streak through a missed day. The streak
+  // engine itself is not yet implemented; this prop is added now so settings
+  // schema changes don't break existing users when it is.
+  streakFreezeTokens: numberProp("lesson.streakFreezeTokens", 0, {
+    min: 0,
+    max: 5,
+  }),
 } as const;

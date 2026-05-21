@@ -55,6 +55,16 @@ export function EventAlert({ event }: { readonly event: LessonEvent }) {
           />
         </Award>
       );
+    case "drill-complete":
+      return (
+        <Award icon={<DailyGoalIcon />}>
+          <FormattedMessage
+            id="t_ev_Drill_complete"
+            defaultMessage="Drill complete — {minutes} minutes of focused practice."
+            values={{ minutes: event.sessionMinutes }}
+          />
+        </Award>
+      );
   }
 }
 

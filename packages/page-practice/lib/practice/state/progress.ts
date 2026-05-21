@@ -8,6 +8,7 @@ import {
 } from "@keybr/result";
 import { type Settings } from "@keybr/settings";
 import { DailyGoalEvents } from "./event-source-daily-goal.ts";
+import { DrillEvents } from "./event-source-drill.ts";
 import { LetterEvents } from "./event-source-letter.ts";
 import { MicroBreakEvents } from "./event-source-micro-break.ts";
 import { PlateauEvents } from "./event-source-plateau.ts";
@@ -42,6 +43,7 @@ export class Progress {
     const topScore = new TopScoreEvents();
     const dailyGoal = new DailyGoalEvents(this.#dailyGoal);
     const microBreak = new MicroBreakEvents();
+    const drill = new DrillEvents(this.#settings);
     const plateau = new PlateauEvents(
       this.#keyStatsMap,
       new Target(this.#settings),
@@ -55,6 +57,7 @@ export class Progress {
         topScore.append(result, listener);
         dailyGoal.append(result, listener);
         microBreak.append(result, listener);
+        drill.append(result, listener);
         plateau.append(result, listener);
       }
     })();
