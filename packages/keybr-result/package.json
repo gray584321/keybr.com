@@ -10,6 +10,7 @@
     "@keybr/lang": "*",
     "@keybr/math": "*",
     "@keybr/phonetic-model": "*",
+    "@keybr/rating": "*",
     "@keybr/settings": "*",
     "@keybr/textinput": "*"
   },

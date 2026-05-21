@@ -13,6 +13,7 @@
     "@keybr/math": "*",
     "@keybr/phonetic-model": "*",
     "@keybr/rand": "*",
+    "@keybr/rating": "*",
     "@keybr/result": "*",
     "@keybr/settings": "*",
     "@keybr/textinput": "*",

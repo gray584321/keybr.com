@@ -1,11 +1,12 @@
 import { type Letter } from "@keybr/phonetic-model";
+import { newRating, type Rating } from "@keybr/rating";
 import { type KeySample, type KeyStats, type KeyStatsMap } from "@keybr/result";
 import { type CodePoint } from "@keybr/unicode";
 import { type Target } from "./target.ts";
 
 export class LessonKey implements KeyStats {
   static from(keyStats: KeyStats, target: Target): LessonKey {
-    const { letter, samples, timeToType, bestTimeToType } = keyStats;
+    const { letter, samples, timeToType, bestTimeToType, rating } = keyStats;
     return new LessonKey({
       letter,
       samples,
@@ -13,6 +14,7 @@ export class LessonKey implements KeyStats {
       bestTimeToType,
       confidence: target.confidence(timeToType),
       bestConfidence: target.confidence(bestTimeToType),
+      rating: rating ?? newRating(),
     });
   }
 
@@ -22,6 +24,7 @@ export class LessonKey implements KeyStats {
   readonly bestTimeToType: number | null;
   readonly confidence: number | null;
   readonly bestConfidence: number | null;
+  readonly rating: Rating;
   readonly isIncluded: boolean;
   readonly isFocused: boolean;
   readonly isForced: boolean;
@@ -33,6 +36,7 @@ export class LessonKey implements KeyStats {
     bestTimeToType,
     confidence,
     bestConfidence,
+    rating = newRating(),
     isIncluded = false,
     isFocused = false,
     isForced = false,
@@ -43,6 +47,7 @@ export class LessonKey implements KeyStats {
     bestTimeToType: number | null;
     confidence: number | null;
     bestConfidence: number | null;
+    rating?: Rating;
     isIncluded?: boolean;
     isFocused?: boolean;
     isForced?: boolean;
@@ -53,6 +58,7 @@ export class LessonKey implements KeyStats {
     this.bestTimeToType = bestTimeToType;
     this.confidence = confidence;
     this.bestConfidence = bestConfidence;
+    this.rating = rating;
     this.isIncluded = isIncluded;
     this.isFocused = isFocused;
     this.isForced = isForced;
