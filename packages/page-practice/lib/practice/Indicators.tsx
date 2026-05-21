@@ -10,6 +10,7 @@ import {
 } from "@keybr/lesson-ui";
 import { Popup, Portal } from "@keybr/widget";
 import { memo, type ReactNode, useEffect, useState } from "react";
+import { BigramPanel } from "./BigramPanel.tsx";
 import * as styles from "./Indicators.module.less";
 import { KeyExtendedDetails } from "./KeyExtendedDetails.tsx";
 import { type LessonState } from "./state/index.ts";
@@ -87,6 +88,9 @@ export const Indicators = memo(function Indicators({
       <StreakListRow streakList={streakList} names={names} />
       {dailyGoal.goal > 0 && (
         <DailyGoalRow dailyGoal={dailyGoal} names={names} />
+      )}
+      {state.lastLesson != null && (
+        <BigramPanel bigramStats={state.lastLesson.bigramStats} />
       )}
       {(hover.type === "visible" || hover.type === "visible-out") && (
         <Portal>

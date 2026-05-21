@@ -1,6 +1,10 @@
 import { Ngram2 } from "@keybr/keyboard";
 import { Histogram, KeySet } from "@keybr/math";
-import { type Result } from "@keybr/result";
+import {
+  type BigramStatsMap,
+  makeBigramStatsMap,
+  type Result,
+} from "@keybr/result";
 import { type Step } from "@keybr/textinput";
 import { type HasCodePoint } from "@keybr/unicode";
 
@@ -10,6 +14,7 @@ export type LastLesson = {
   readonly misses: Histogram<HasCodePoint>;
   readonly hits2: Ngram2;
   readonly misses2: Ngram2;
+  readonly bigramStats: BigramStatsMap;
 };
 
 export function makeLastLesson(
@@ -31,5 +36,6 @@ export function makeLastLesson(
   for (let i = 0; i < steps.length - 1; i++) {
     hits2.add(steps[i].codePoint, steps[i + 1].codePoint, 1);
   }
-  return { result, hits, misses, hits2, misses2 };
+  const bigramStats = makeBigramStatsMap(steps);
+  return { result, hits, misses, hits2, misses2, bigramStats };
 }
