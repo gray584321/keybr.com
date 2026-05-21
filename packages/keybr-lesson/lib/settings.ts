@@ -102,4 +102,15 @@ export const lessonProps = {
     min: 0,
     max: 5,
   }),
+  // When > 0, the practice screen offers a brief warm-up drill of high-
+  // frequency bigrams before the user's first session of the day.
+  warmupSeconds: numberProp("lesson.warmupSeconds", 0, { min: 0, max: 120 }),
+  // Multiplier applied to targetSpeed for the plateau-breaker overspeed
+  // drill (deliberate practice / overspeed-burst literature). 1.15 = 15%
+  // above comfortable pace, the practitioner-consensus sweet spot.
+  plateauDrillSpeedMultiplier: numberProp(
+    "lesson.plateauDrillSpeedMultiplier",
+    1.15,
+    { min: 1.0, max: 1.5 },
+  ),
 } as const;

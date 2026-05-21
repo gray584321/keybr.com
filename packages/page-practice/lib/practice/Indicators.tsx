@@ -14,6 +14,7 @@ import { BigramPanel } from "./BigramPanel.tsx";
 import * as styles from "./Indicators.module.less";
 import { KeyExtendedDetails } from "./KeyExtendedDetails.tsx";
 import { type LessonState } from "./state/index.ts";
+import { WarmupCard } from "./WarmupCard.tsx";
 
 export const Indicators = memo(function Indicators({
   state,
@@ -62,6 +63,7 @@ export const Indicators = memo(function Indicators({
   }, [hover]);
   return (
     <div id={names.indicators} className={styles.indicators}>
+      <WarmupCard />
       <div
         className={
           liveSpeed != null

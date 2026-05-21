@@ -51,7 +51,7 @@ export function EventAlert({ event }: { readonly event: LessonEvent }) {
         <Award icon={<TrophyIcon />}>
           <FormattedMessage
             id="t_ev_Plateau"
-            defaultMessage="Stuck on this key? Plateaus break with rest — sleep on it, or try a different lesson mode."
+            defaultMessage="Plateau detected. Try a 90-second burst at 15% above your target speed — overspeed practice breaks plateaus better than continued practice at comfortable pace."
           />
         </Award>
       );
