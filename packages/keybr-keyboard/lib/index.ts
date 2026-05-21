@@ -1,3 +1,4 @@
+export * from "./bigramcost.ts";
 export * from "./context.tsx";
 export * from "./fakes.ts";
 export * from "./filter.ts";

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import { type Step } from "@keybr/textinput";
-import { deepEqual, equal, isNotNull } from "rich-assert";
+import { deepEqual, equal, isNotNullish } from "rich-assert";
 import {
   findSlowestBigrams,
   makeBigramStatsMap,
@@ -31,7 +31,7 @@ test("bigram IKI is step2.timeStamp - step1.timeStamp", () => {
   const steps: Step[] = [step(0, 0x68), step(150, 0x65)];
   const map = makeBigramStatsMap(steps);
   const stats = map.get("he");
-  isNotNull(stats);
+  isNotNullish(stats);
   equal(stats.hitCount, 1);
   equal(stats.bestTimeToType, 150);
   equal(stats.timeToType, 150);
@@ -61,8 +61,8 @@ test("EMA filter is per-bigram and does not bleed state between bigrams", () => 
 
   const ab = map.get("ab");
   const cd = map.get("cd");
-  isNotNull(ab);
-  isNotNull(cd);
+  isNotNullish(ab);
+  isNotNullish(cd);
   // With per-bigram filters, the first-sample value of each bigram equals
   // the raw sample. Bleed would produce e.g. 0.1*200 + 0.9*100 = 110 for "cd".
   equal(ab.timeToType, 100);
@@ -74,7 +74,7 @@ test("merging maps recomputes filter chronologically", () => {
   const m2 = makeBigramStatsMap([step(1000, 0x61), step(1300, 0x62)]);
   const merged = mergeBigramStatsMaps(m1, m2);
   const ab = merged.get("ab");
-  isNotNull(ab);
+  isNotNullish(ab);
   equal(ab.hitCount, 2);
   equal(ab.bestTimeToType, 100);
 });

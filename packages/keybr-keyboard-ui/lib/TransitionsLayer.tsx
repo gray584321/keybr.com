@@ -1,16 +1,33 @@
-import { type KeyShape, useKeyboard } from "@keybr/keyboard";
+import {
+  classifyBigramCost,
+  type KeyShape,
+  useKeyboard,
+} from "@keybr/keyboard";
 import { type CodePoint } from "@keybr/unicode";
 import { clsx } from "clsx";
 import { memo, type ReactNode } from "react";
 import { getKeyCenter, Surface } from "./shapes.tsx";
 import * as styles from "./TransitionsLayer.module.less";
 
+export type TransitionsModifier = "h" | "m" | "f";
+
+/**
+ * Optional secondary coloring strategy applied on top of the modifier-based
+ * arc color. When set to "sfb", same-finger bigrams render in the SFB
+ * highlight style while non-SFB arcs render with the dimmed alternate style;
+ * this surfaces problematic transitions on the keyboard heatmap regardless
+ * of how frequent they are.
+ */
+export type TransitionsColorBy = "sfb";
+
 export const TransitionsLayer = memo(function TransitionsLayer({
   histogram,
   modifier,
+  colorBy,
 }: {
   readonly histogram: Iterable<readonly [CodePoint, CodePoint, number]>;
-  readonly modifier: "h" | "m" | "f";
+  readonly modifier: TransitionsModifier;
+  readonly colorBy?: TransitionsColorBy;
 }): ReactNode {
   type Item = [shape0: KeyShape, shape1: KeyShape, f: number];
   const keyboard = useKeyboard();
@@ -100,16 +117,24 @@ export const TransitionsLayer = memo(function TransitionsLayer({
     return (
       <path
         key={index}
-        className={clsx(styles.arc, modifierStyle(modifier))}
+        className={clsx(styles.arc, classNameFor(shape0, shape1))}
         d={`M ${X1} ${Y1} Q ${mx} ${my} ${X2} ${Y2}`}
         opacity={f * 0.9 + 0.1}
         markerEnd={`url(#${styles.arrow})`}
       />
     );
   }
+
+  function classNameFor(shape0: KeyShape, shape1: KeyShape) {
+    if (colorBy === "sfb") {
+      const cost = classifyBigramCost(shape0, shape1);
+      return cost.class === "sfb" ? styles.sfb : styles.fAlt;
+    }
+    return modifierStyle(modifier);
+  }
 });
 
-function modifierStyle(m: "h" | "m" | "f") {
+function modifierStyle(m: TransitionsModifier) {
   switch (m) {
     case "h":
       return styles.h;
