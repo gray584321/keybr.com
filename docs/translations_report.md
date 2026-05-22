@@ -1,121 +1,266 @@
 # English
 
-Translated: 342 messages, 4749 words
+Translated: 367 messages, 4923 words
 
 Untranslated: 0 messages, 0 words
 
 # Afrikaans
 
-Translated: 339 messages, 4744 words
+Translated: 337 messages, 4735 words
 
-Untranslated: 3 messages, 5 words
+Untranslated: 26 messages, 161 words
 
+* *Score*
+* *Speed*
 * *Letters*
 * *Volume:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* ...
 
 # Arabic
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Bulgarian
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Bangla
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Catalan
 
-Translated: 310 messages, 3556 words
+Translated: 308 messages, 3547 words
 
-Untranslated: 30 messages, 1171 words
+Untranslated: 53 messages, 1327 words
 
+* *Score*
+* *Speed*
 * *Errors*
 * *Zones:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Sound theme:*
+* *Bigram density*
 * *Explain charts*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
 * *Relative Accuracy*
 * *Repeat each word:*
-* *The previous keys are also above the target speed*
-* *Generate lessons that resemble the specified programming lan...*
-* *Practice punctuation characters that are specific to a progr...*
-* *This is a histogram of the accuracies of all users, and your...*
-* *Show color coding of the keyboard zones. Use this option to ...*
-* *Generate typing lessons from the text of a book. All keys ar...*
-* *Highlight a key that must to be pressed next. Use this optio...*
-* *<p>This indicator shows the current subset of letters used t...*
-* *Repeat each word a number of times. Type a word for the firs...*
-* *See how accurate you type relative to other users. The highe...*
-* *Adjust the amount of basic punctuation characters added to t...*
-* *<p>This indicator can also be used to predict the remaining ...*
-* *<p>This is the accuracy indicator and the difference from th...*
+* *Same-finger bigrams*
 * ...
 
 # Czech
 
-Translated: 338 messages, 4742 words
+Translated: 336 messages, 4733 words
 
-Untranslated: 4 messages, 7 words
+Untranslated: 27 messages, 163 words
 
 * *Font:*
+* *Score*
+* *Speed*
 * *Syntax:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Sound theme:*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* ...
 
 # Danish
 
-Translated: 331 messages, 4689 words
+Translated: 329 messages, 4680 words
 
-Untranslated: 9 messages, 38 words
+Untranslated: 32 messages, 194 words
 
 * *Score*
+* *Score*
+* *Speed*
 * *Layout*
 * *Layout:*
 * *Layouts*
+* *Accuracy*
 * *Position*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Multiplayer*
 * *Download data*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
-* *Repeat each word a number of times. Type a word for the firs...*
+* *Practice metrics*
+* *Your Typing Twin*
+* ...
 
 # German
 
-Translated: 339 messages, 4744 words
+Translated: 337 messages, 4735 words
 
-Untranslated: 3 messages, 5 words
+Untranslated: 26 messages, 161 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
 * *Position*
 * *Alphabet:*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* ...
 
 # Greek
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Esperanto
 
-Translated: 77 messages, 1126 words
+Translated: 75 messages, 1117 words
 
-Untranslated: 258 messages, 3565 words
+Untranslated: 281 messages, 3721 words
 
 * *GO!*
 * *Copy*
@@ -127,6 +272,8 @@ Untranslated: 258 messages, 3565 words
 * *Close*
 * *Font:*
 * *Reset*
+* *Score*
+* *Speed*
 * *Speed*
 * *Visit*
 * *Errors*
@@ -135,90 +282,125 @@ Untranslated: 258 messages, 3565 words
 * *Layouts*
 * *Lessons*
 * *Lessons*
-* *Not set*
-* *Numbers*
 * ...
 
 # Spanish
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Estonian
 
-Translated: 338 messages, 4743 words
+Translated: 336 messages, 4734 words
 
-Untranslated: 4 messages, 6 words
+Untranslated: 27 messages, 162 words
 
 * *GO!*
 * *Font:*
+* *Score*
+* *Speed*
+* *Accuracy*
 * *Progress*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* ...
 
 # Persian
 
-Translated: 295 messages, 2959 words
+Translated: 293 messages, 2950 words
 
-Untranslated: 45 messages, 1768 words
+Untranslated: 68 messages, 1924 words
 
 * *Books*
+* *Score*
+* *Speed*
 * *Zones:*
 * *Syntax:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Sound theme:*
 * *Top accuracy*
+* *Bigram density*
 * *Explain charts*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
 * *Repeat each word:*
-* *Keyboard hardware emulates layout*
-* *Circle color: {label1} – hit count, {label2} – miss count.*
-* *Practice punctuation characters that are specific to a progr...*
-* *Show color coding of the keyboard zones. Use this option to ...*
-* *Bar color: {label1} – hit count, {label2} – miss count, {lab...*
-* *Generate typing lessons from the text of a book. All keys ar...*
-* *Horizontal axis: lesson number. Vertical axis: typing speed ...*
-* *<a>Benford’s law</a> is an observation that in many real-lif...*
-* *You don’t have any accuracy streaks. Consider completing a l...*
-* *These are the typing assists which help your preserve your c...*
-* *Horizontal axis: lesson number. Vertical axis: {label1} – ty...*
-* *Horizontal axis: lesson number. Vertical axis: {label1} – ty...*
 * ...
 
 # Finnish
 
-Translated: 208 messages, 2284 words
+Translated: 206 messages, 2275 words
 
-Untranslated: 128 messages, 2409 words
+Untranslated: 151 messages, 2565 words
 
 * *GO!*
 * *Time*
+* *Score*
+* *Speed*
 * *Layouts*
 * *Metrics*
 * *Not set*
 * *Syntax:*
+* *Accuracy*
 * *Position*
 * *Practice*
 * *Settings*
 * *Top speed*
 * *Uncertain*
 * *Characters*
+* *Daily goal*
+* *Real prose*
 * *Top speed!*
 * *High Scores*
-* *Multiplayer*
-* *Smoothness:*
-* *Play sounds:*
-* *Average speed*
-* *Benford’s law*
-* *Download data*
+* *Manual list*
 * ...
 
 # Faroese
 
-Translated: 44 messages, 583 words
+Translated: 42 messages, 574 words
 
-Untranslated: 290 messages, 4097 words
+Untranslated: 313 messages, 4253 words
 
 * *GO!*
 * *Copy*
@@ -230,6 +412,8 @@ Untranslated: 290 messages, 4097 words
 * *Close*
 * *Font:*
 * *Reset*
+* *Score*
+* *Speed*
 * *Speed*
 * *Speed*
 * *Visit*
@@ -238,81 +422,181 @@ Untranslated: 290 messages, 4097 words
 * *Typing*
 * *Zones:*
 * *Account*
-* *Layout:*
-* *Layouts*
 * ...
 
 # French
 
-Translated: 333 messages, 4544 words
+Translated: 331 messages, 4535 words
 
-Untranslated: 9 messages, 205 words
+Untranslated: 32 messages, 361 words
 
+* *Score*
+* *Speed*
 * *Zones:*
 * *Options*
 * *Volume:*
+* *Accuracy*
 * *Position*
 * *Alphabet:*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
-* *Above are listed the longest continuous sequences of lessons...*
-* *When you focus on a new key, it is very likely that the spee...*
-* *The target speed is used to measure the confidence level and...*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* ...
 
 # Irish
 
-Translated: 337 messages, 4735 words
+Translated: 335 messages, 4726 words
 
-Untranslated: 5 messages, 14 words
+Untranslated: 28 messages, 170 words
 
+* *Score*
+* *Speed*
 * *Zones:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Smoothness:*
 * *Sound theme:*
 * *M|T|W|T|F|S|S*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* ...
 
 # Hebrew
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Croatian
 
-Translated: 337 messages, 4740 words
+Translated: 335 messages, 4731 words
 
-Untranslated: 5 messages, 9 words
+Untranslated: 28 messages, 165 words
 
 * *Font:*
 * *Reset*
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Multiplayer*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
-* *Premium account price:*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* ...
 
 # Hungarian
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Indonesian
 
-Translated: 339 messages, 4744 words
+Translated: 337 messages, 4735 words
 
-Untranslated: 3 messages, 5 words
+Untranslated: 26 messages, 161 words
 
 * *GO!*
+* *Score*
+* *Speed*
 * *Volume:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* ...
 
 # Icelandic
 
-Translated: 95 messages, 1742 words
+Translated: 93 messages, 1733 words
 
-Untranslated: 240 messages, 2949 words
+Untranslated: 263 messages, 3105 words
 
 * *GO!*
 * *Copy*
@@ -325,6 +609,8 @@ Untranslated: 240 messages, 2949 words
 * *Font:*
 * *Reset*
 * *Retry*
+* *Score*
+* *Speed*
 * *Speed*
 * *Visit*
 * *Errors*
@@ -332,37 +618,69 @@ Untranslated: 240 messages, 2949 words
 * *Zones:*
 * *Account*
 * *Layouts*
-* *Lessons*
-* *Metrics*
 * ...
 
 # Italian
 
-Translated: 334 messages, 4738 words
+Translated: 332 messages, 4729 words
 
-Untranslated: 7 messages, 9 words
+Untranslated: 30 messages, 165 words
 
 * *Font:*
+* *Score*
+* *Speed*
 * *Layout*
 * *Account*
 * *Layout:*
 * *Layouts*
 * *Volume:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* ...
 
 # Japanese
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Korean
 
-Translated: 145 messages, 1297 words
+Translated: 143 messages, 1288 words
 
-Untranslated: 195 messages, 3430 words
+Untranslated: 218 messages, 3586 words
 
 * *Copy*
 * *Done*
@@ -371,6 +689,8 @@ Untranslated: 195 messages, 3430 words
 * *Close*
 * *Font:*
 * *Reset*
+* *Score*
+* *Speed*
 * *Visit*
 * *Typing*
 * *Zones:*
@@ -380,45 +700,43 @@ Untranslated: 195 messages, 3430 words
 * *Preview*
 * *Syntax:*
 * *Volume:*
+* *Accuracy*
 * *All keys*
-* *Chapters*
-* *Keyboard*
-* *Previous*
 * ...
 
 # Lithuanian
 
-Translated: 305 messages, 3388 words
+Translated: 303 messages, 3379 words
 
-Untranslated: 34 messages, 1330 words
+Untranslated: 57 messages, 1486 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
 * *Accuracy Streaks*
+* *Practice metrics*
+* *Your Typing Twin*
 * *Relative Accuracy*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
 * *No accuracy streaks.*
-* *Practice numbers only.*
-* *The difference from the average value.*
-* *Download all your typing data in JSON format.*
-* *The detailed statistics regarding your learning progress.*
-* *Permanently delete all of your typing data and reset statist...*
-* *This is a histogram of the accuracies of all users, and your...*
-* *Adjust the number of words in the lesson text. Making lesson...*
-* *Show color coding of the keyboard zones. Use this option to ...*
-* *Are you sure you want to delete all data and reset your prof...*
-* *You don’t have any accuracy streaks. Consider completing a l...*
-* *Highlight a key that must to be pressed next. Use this optio...*
-* *<p>This indicator shows the current subset of letters used t...*
-* *Repeat each word a number of times. Type a word for the firs...*
-* *See how accurate you type relative to other users. The highe...*
-* *Manually unlock the remaining letters. Use this option if wa...*
-* *Adjust the amount of capital letters added to the lesson tex...*
+* *Your slowest bigrams*
+* *Common English bigrams*
 * ...
 
 # Mongolian
 
 Translated: 16 messages, 378 words
 
-Untranslated: 316 messages, 4273 words
+Untranslated: 337 messages, 4420 words
 
 * *GO!*
 * *Copy*
@@ -433,270 +751,543 @@ Untranslated: 316 messages, 4273 words
 * *Reset*
 * *Retry*
 * *Score*
+* *Score*
+* *Speed*
 * *Speed*
 * *Speed*
 * *Visit*
 * *Digits*
 * *Errors*
-* *Layout*
-* *Resend*
 * ...
 
 # Norwegian Bokmål
 
-Translated: 211 messages, 2446 words
+Translated: 209 messages, 2437 words
 
-Untranslated: 126 messages, 2250 words
+Untranslated: 149 messages, 2406 words
 
 * *Done*
 * *Help*
 * *Books*
 * *Font:*
+* *Score*
+* *Speed*
 * *Speed*
 * *Account*
+* *Accuracy*
 * *Accuracy*
 * *Settings*
 * *Alphabet:*
 * *Examples:*
 * *All sounds*
 * *Daily goal*
+* *Daily goal*
 * *Last speed*
+* *Real prose*
 * *Custom text*
 * *Daily goal:*
-* *Smoothness:*
-* *Whitespace:*
-* *Cursor shape:*
-* *Learning rate*
-* *No whitespace*
 * ...
 
 # Nepali
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Dutch
 
-Translated: 333 messages, 4736 words
+Translated: 331 messages, 4727 words
 
-Untranslated: 8 messages, 11 words
+Untranslated: 31 messages, 167 words
 
 * *Score*
+* *Score*
+* *Speed*
 * *Zones:*
 * *Account*
 * *Letters*
 * *Volume:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Multiplayer*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
 * *Premium account*
+* *Practice metrics*
+* *Your Typing Twin*
+* ...
 
 # Polish
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Brazilian Portuguese
 
-Translated: 338 messages, 4743 words
+Translated: 336 messages, 4734 words
 
-Untranslated: 4 messages, 6 words
+Untranslated: 27 messages, 162 words
 
+* *Score*
+* *Speed*
 * *Layout*
 * *Layout:*
 * *Layouts*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* ...
 
 # European Portuguese
 
-Translated: 319 messages, 4618 words
+Translated: 317 messages, 4609 words
 
-Untranslated: 21 messages, 109 words
+Untranslated: 44 messages, 265 words
 
 * *Books*
+* *Score*
+* *Speed*
 * *Layout*
 * *Zones:*
 * *Layout:*
 * *Layouts*
 * *Volume:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
 * *Top score!*
 * *Top speed!*
+* *Manual list*
 * *Sound theme:*
 * *Top accuracy*
+* *Bigram density*
 * *Explain charts*
-* *Key sounds only*
-* *Average accuracy*
-* *Relative Accuracy*
-* *Repeat each word:*
-* *Daily goal reached!*
-* *New letter unlocked!*
-* *Premium account price:*
-* *This is a histogram of the accuracies of all users, and your...*
-* *Repeat each word a number of times. Type a word for the firs...*
+* *Focus strategy*
+* *Target bigrams*
 * ...
 
 # Romanian
 
-Translated: 298 messages, 3587 words
+Translated: 296 messages, 3578 words
 
-Untranslated: 37 messages, 1118 words
+Untranslated: 60 messages, 1274 words
 
 * *Font:*
+* *Score*
+* *Speed*
 * *Layout*
 * *Zones:*
 * *Account*
 * *Layout:*
 * *Layouts*
+* *Accuracy*
 * *Translate*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Multiplayer*
 * *Sound theme:*
 * *Top accuracy*
+* *Bigram density*
+* *Focus strategy*
 * *Forgive errors*
-* *Key sounds only*
-* *Average accuracy*
-* *Relative Accuracy*
-* *Repeat each word:*
-* *Start in {countDown}*
-* *Premium account price:*
-* *Enter full-screen mode.*
-* *<h1>Connecting to Server...</h1><p>Establishing connection t...*
-* *<p>The precise meaning of each indicator color is given in t...*
+* *Target bigrams*
 * ...
 
 # Russian
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Slovak
 
-Translated: 340 messages, 4745 words
+Translated: 338 messages, 4736 words
 
-Untranslated: 2 messages, 4 words
+Untranslated: 25 messages, 160 words
 
+* *Score*
+* *Speed*
 * *Syntax:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* ...
 
 # Slovenian
 
-Translated: 340 messages, 4745 words
+Translated: 338 messages, 4736 words
 
-Untranslated: 2 messages, 4 words
+Untranslated: 25 messages, 160 words
 
 * *Font:*
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* ...
 
 # Albanian
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Swedish
 
-Translated: 338 messages, 4743 words
+Translated: 336 messages, 4734 words
 
-Untranslated: 4 messages, 6 words
+Untranslated: 27 messages, 162 words
 
+* *Score*
+* *Speed*
 * *Layout*
 * *Layout:*
 * *Syntax:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* ...
 
 # Thai
 
-Translated: 329 messages, 4635 words
+Translated: 327 messages, 4626 words
 
-Untranslated: 11 messages, 92 words
+Untranslated: 34 messages, 248 words
 
+* *Score*
+* *Speed*
 * *Zones:*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *Sound theme:*
 * *Top accuracy*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
 * *Average accuracy*
+* *Practice metrics*
+* *Your Typing Twin*
 * *Relative Accuracy*
 * *Repeat each word:*
-* *Premium account price:*
-* *This is a histogram of the accuracies of all users, and your...*
-* *Repeat each word a number of times. Type a word for the firs...*
-* *See how accurate you type relative to other users. The highe...*
+* *Same-finger bigrams*
+* ...
 
 # Turkish
 
-Translated: 227 messages, 2126 words
+Translated: 225 messages, 2117 words
 
-Untranslated: 110 messages, 2568 words
+Untranslated: 133 messages, 2724 words
 
 * *Books*
 * *Font:*
+* *Score*
+* *Speed*
 * *Zones:*
 * *Metrics*
 * *Preview*
 * *Sign-In*
 * *Syntax:*
+* *Accuracy*
 * *Alphabet:*
 * *Box cursor*
+* *Daily goal*
+* *Real prose*
 * *Line cursor*
+* *Manual list*
 * *Source code*
 * *Whitespace:*
 * *Block cursor*
 * *Top accuracy*
-* *No whitespace*
-* *Smooth cursor*
-* *Bar whitespace*
-* *Emulate layout*
-* *Explain charts*
-* *Highlight keys*
 * ...
 
 # Ukrainian
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Vietnamese
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Simplified Chinese
 
-Translated: 340 messages, 4739 words
+Translated: 338 messages, 4730 words
 
-Untranslated: 2 messages, 10 words
+Untranslated: 25 messages, 166 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
 * *M|T|W|T|F|S|S*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* ...
 
 # Traditional Chinese
 
-Translated: 341 messages, 4746 words
+Translated: 339 messages, 4737 words
 
-Untranslated: 1 messages, 3 words
+Untranslated: 24 messages, 159 words
 
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* *The fraction of your daily goal that this colour band repres...*
+* ...
 
 # Chinese (Taiwan)
 
-Translated: 340 messages, 4745 words
+Translated: 338 messages, 4736 words
 
-Untranslated: 2 messages, 4 words
+Untranslated: 25 messages, 160 words
 
 * *GO!*
+* *Score*
+* *Speed*
+* *Accuracy*
+* *Daily goal*
+* *Real prose*
+* *Manual list*
+* *Bigram density*
+* *Focus strategy*
+* *Target bigrams*
+* *Bigram practice*
 * *Key sounds only*
+* *Practice metrics*
+* *Your Typing Twin*
+* *Same-finger bigrams*
+* *Avoid target bigrams*
+* *Your slowest bigrams*
+* *Common English bigrams*
+* *Every bigram is a target*
+* *At least one target per word*
+* ...
