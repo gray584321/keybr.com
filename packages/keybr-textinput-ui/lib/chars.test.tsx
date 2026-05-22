@@ -21,42 +21,42 @@ test("render simple chars", () => {
     [
       <span
         key={0}
-        className={undefined}
+        className="char hit"
         style={{ color: "var(--textinput--hit__color)" }}
       >
         a
       </span>,
       <span
         key={1}
-        className={undefined}
+        className="char miss"
         style={{ color: "var(--textinput--miss__color)" }}
       >
         b
       </span>,
       <span
         key={2}
-        className={undefined}
+        className="char hit"
         style={{ color: "var(--textinput--hit__color)" }}
       >
         c
       </span>,
       <span
         key={3}
-        className={undefined}
+        className="char special hit"
         style={{ color: "var(--textinput--hit__color)" }}
       >
         {"\uE000"}
       </span>,
       <span
         key={4}
-        className="cursor"
+        className="char cursor"
         style={{ color: "var(--textinput__color)" }}
       >
         x
       </span>,
       <span
         key={5}
-        className={undefined}
+        className="char normal"
         style={{ color: "var(--textinput__color)" }}
       >
         yz
@@ -79,42 +79,42 @@ test("render styled chars", () => {
     [
       <span
         key={0}
-        className={undefined}
+        className="char hit"
         style={{ color: "var(--textinput--hit__color)" }}
       >
         a
       </span>,
       <span
         key={1}
-        className={undefined}
+        className="char miss"
         style={{ color: "var(--textinput--miss__color)" }}
       >
         b
       </span>,
       <span
         key={2}
-        className={undefined}
+        className="char hit"
         style={{ color: "var(--textinput--hit__color)" }}
       >
         c
       </span>,
       <span
         key={3}
-        className={undefined}
+        className="char special hit"
         style={{ color: "var(--textinput--hit__color)" }}
       >
         {"\uE000"}
       </span>,
       <span
         key={4}
-        className="cursor"
+        className="char cursor"
         style={{ color: "var(--syntax-keyword)" }}
       >
         x
       </span>,
       <span
         key={5}
-        className={undefined}
+        className="char normal"
         style={{ color: "var(--syntax-keyword)" }}
       >
         yz
@@ -134,28 +134,28 @@ test("render special chars", () => {
     [
       <span
         key={0}
-        className={undefined}
+        className="char special"
         style={{ color: "var(--textinput--special__color)" }}
       >
         U+0000
       </span>,
       <span
         key={1}
-        className={undefined}
+        className="char special"
         style={{ color: "var(--textinput--special__color)" }}
       >
         {"\uE002"}
       </span>,
       <span
         key={2}
-        className={undefined}
+        className="char special"
         style={{ color: "var(--textinput--special__color)" }}
       >
         {"\uE003"}
       </span>,
       <span
         key={3}
-        className={undefined}
+        className="char special"
         style={{ color: "var(--textinput--special__color)" }}
       >
         {"\uE000"}

@@ -1,0 +1,74 @@
+.cursor {
+  /* The cursor element is positioned via inline left/top set in JS. */
+  /* These styles add the visual polish: pulse, glow, smooth softening. */
+  border-radius: var(--radius-sm, 2px);
+  box-shadow:
+    0 0 0.4rem var(--textinput-cursor__background-color),
+    0 0 1.2rem -0.3rem var(--textinput-cursor__background-color);
+  will-change: left, top, opacity, box-shadow;
+  transition:
+    left var(--motion-fast, 140ms)
+      var(--easing-decel, cubic-bezier(0, 0, 0.2, 1)),
+    top var(--motion-fast, 140ms)
+      var(--easing-decel, cubic-bezier(0, 0, 0.2, 1)),
+    box-shadow var(--motion-fast, 140ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1)),
+    opacity var(--motion-fast, 140ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
+  animation: cursorPulse 1.1s
+    var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+}
+
+.cursorSmooth {
+  /* When JS-driven smooth caret movement is enabled, the Web Animations API
+     drives left/top transitions explicitly. Disable the CSS transition for
+     left/top so it doesn't fight the WAAPI animation. */
+  transition:
+    box-shadow var(--motion-fast, 140ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1)),
+    opacity var(--motion-fast, 140ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.cursorBlock,
+.cursorBox {
+  /* Block-style cursors fill the character cell; don't pulse on opacity
+     (it would dim the character glyph), keep a subtle glow only. */
+  animation: cursorPulseSoft 1.4s
+    var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1)) infinite;
+}
+
+@keyframes cursorPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0.4rem var(--textinput-cursor__background-color),
+      0 0 1.2rem -0.3rem var(--textinput-cursor__background-color);
+    opacity: 1;
+  }
+  50% {
+    box-shadow:
+      0 0 0.2rem var(--textinput-cursor__background-color),
+      0 0 0.6rem -0.3rem var(--textinput-cursor__background-color);
+    opacity: 0.55;
+  }
+}
+
+@keyframes cursorPulseSoft {
+  0%,
+  100% {
+    box-shadow: 0 0 0.4rem -0.1rem var(--textinput-cursor__background-color);
+  }
+  50% {
+    box-shadow: 0 0 0.2rem -0.1rem var(--textinput-cursor__background-color);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor,
+  .cursorBlock,
+  .cursorBox {
+    transition: none;
+    animation: none;
+  }
+}

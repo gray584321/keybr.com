@@ -1,17 +1,22 @@
 .root {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--space-4, 1rem);
   justify-content: center;
 }
 
 .calendar {
+  padding: var(--space-2, 0.5rem);
   border: var(--separator-border);
+  border-radius: var(--radius-md, 6px);
+  background-color: var(--surface-1, transparent);
+  transition: box-shadow var(--motion-fast, 120ms) var(--easing-standard, ease);
 }
 
 .table {
   table-layout: fixed;
-  border-collapse: collapse;
+  border-spacing: 2px;
+  border-collapse: separate;
   cursor: default;
 }
 
@@ -23,15 +28,31 @@
 }
 
 .caption {
+  margin-block-end: var(--space-1, 0.25rem);
+  padding-inline: var(--space-2, 0.5rem);
+  padding-block: var(--space-1, 0.25rem);
+  border-radius: var(--radius-sm, 4px);
   background-color: var(--Calendar-caption__background-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
 .headerCell {
+  padding-block: 0.125rem;
+  border-radius: var(--radius-sm, 4px);
   background-color: var(--Calendar-headerCell__background-color);
+  opacity: 0.7;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .cell {
+  border-radius: var(--radius-sm, 4px);
   background-color: var(--Calendar-cell--background-color);
 }
 
@@ -39,7 +60,18 @@
   display: block;
   inline-size: 1.5rem;
   block-size: 1.5rem;
+  border-radius: var(--radius-sm, 4px);
   font-size: 0.75rem;
   line-height: 1.5rem;
   text-align: center;
+  transition:
+    background-color var(--motion-fast, 120ms) var(--easing-standard, ease),
+    transform var(--motion-fast, 120ms) var(--easing-standard, ease),
+    box-shadow var(--motion-fast, 120ms) var(--easing-standard, ease);
+  font-variant-numeric: tabular-nums;
+}
+
+.item:hover {
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.08));
+  transform: scale(1.08);
 }

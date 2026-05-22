@@ -1,12 +1,41 @@
+.root {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1, 0.25rem);
+  align-items: center;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.label {
+  margin-inline-end: var(--space-1, 0.25rem);
+  color: var(--text-color-f1, var(--text-color));
+  opacity: 0.85;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
 .cell {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm, 4px);
   background-color: var(--Calendar-cell--background-color);
   cursor: default;
 }
 
 .item {
   display: inline-block;
-  inline-size: 4rem;
-  padding-block: 0.25rem;
+  inline-size: 2.5rem;
+  padding-inline: var(--space-1, 0.25rem);
+  padding-block: 0.125rem;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 0.6875rem;
+  line-height: 1.2;
   text-align: center;
+  transition: transform var(--motion-fast, 120ms) var(--easing-standard, ease);
+  font-variant-numeric: tabular-nums;
+}
+
+.cell:hover .item {
+  transform: scale(1.05);
 }

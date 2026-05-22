@@ -1,17 +1,154 @@
-.textInput_normal {
-  margin-block-start: 3rem;
+// Override Screen's default width cap so the focus-mode layout can use the
+// full viewport for the rail/dock/HUD strips. Screen still provides the
+// section element and outer block margin.
+.screen {
+  min-inline-size: 0;
+  max-inline-size: none;
+  margin-inline: var(--space-6);
+  margin-block: var(--space-3);
 }
 
-.textInput_compact {
-  margin-inline: -4rem;
-  margin-block-start: 3rem;
+.layout {
+  display: grid;
+  gap: var(--space-4) var(--space-5);
+  align-items: start;
+  min-block-size: calc(100vb - var(--space-8));
 }
 
-.textInput_bare {
-  margin-inline: -8rem;
-  padding-block-start: 10rem;
+.hudArea {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+  grid-area: hud;
+  border-block-end: 1px solid var(--separator-color);
+  background-color: var(--surface-1);
 }
 
-.keyboard {
-  margin-block-start: 3rem;
+.textArea {
+  grid-area: text;
+  align-self: center;
+  inline-size: 100%;
+}
+
+.textInputNormal {
+  margin-block-start: var(--space-6);
+}
+
+.textInputCompact {
+  margin-block-start: var(--space-6);
+  padding-inline: var(--space-6);
+}
+
+.textInputBare {
+  margin-block-start: var(--space-8);
+  padding-inline: var(--space-8);
+}
+
+.keyboardArea {
+  grid-area: keyboard;
+  margin-block-start: var(--space-6);
+}
+
+.railArea {
+  grid-area: rail;
+  align-self: start;
+  padding-inline-start: var(--space-4);
+  border-inline-start: 1px solid var(--separator-color);
+}
+
+.dockArea {
+  display: flex;
+  position: relative;
+  grid-area: dock;
+  justify-content: center;
+  margin-block-start: var(--space-4);
+  padding-block: var(--space-3);
+}
+
+//
+// Normal view: HUD top, hero text + rail, keyboard below text, dock at bottom.
+//
+.viewNormal {
+  grid-template-areas:
+    "hud      hud "
+    "text     rail"
+    "keyboard rail"
+    "dock     dock";
+  grid-template-rows: auto 1fr auto auto;
+  grid-template-columns: minmax(0, 1fr) 18rem;
+}
+
+//
+// Compact view: keyboard hidden, hero text fills remaining space, rail
+// collapses to a thin strip. We hide the rail entirely for simplicity.
+//
+.viewCompact {
+  grid-template-areas:
+    "hud "
+    "text"
+    "dock";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
+
+  .railArea {
+    display: none;
+  }
+}
+
+//
+// Bare view: only the hero text is visible. Dock fades in on hover near the
+// bottom of the viewport.
+//
+.viewBare {
+  grid-template-areas:
+    "text"
+    "dock";
+  grid-template-rows: 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
+
+  .dockArea {
+    opacity: 0;
+    transition:
+      opacity var(--motion-base) var(--easing-standard),
+      transform var(--motion-base) var(--easing-standard);
+    transform: translateY(0.5rem);
+
+    &:hover,
+    &:focus-within {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // A small hover-reveal hot zone over the dock so the user can summon it
+  // without the controls themselves being visible.
+  .dockArea::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    block-size: 4rem;
+    pointer-events: auto;
+  }
+}
+
+// Narrow viewport fallback: collapse the rail under the text in Normal view
+// so the hero text never gets crushed below ~60rem wide.
+@media (max-width: 60rem) {
+  .viewNormal {
+    grid-template-areas:
+      "hud"
+      "text"
+      "keyboard"
+      "rail"
+      "dock";
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .railArea {
+    padding-inline-start: 0;
+    padding-block-start: var(--space-4);
+    border-inline-start: none;
+    border-block-start: 1px solid var(--separator-color);
+  }
 }

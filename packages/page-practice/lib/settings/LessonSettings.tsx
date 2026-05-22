@@ -24,12 +24,13 @@ import { GuidedLessonSettings } from "./lesson/GuidedLessonSettings.tsx";
 import { LessonPreview } from "./lesson/LessonPreview.tsx";
 import { NumbersLessonSettings } from "./lesson/NumbersLessonSettings.tsx";
 import { WordListLessonSettings } from "./lesson/WordListLessonSettings.tsx";
+import * as styles from "./SettingsLayout.module.less";
 
 export function LessonSettings(): ReactNode {
   const { formatMessage } = useIntl();
   const { settings, updateSettings } = useSettings();
   return (
-    <>
+    <div className={styles.section}>
       <TabList
         selectedIndex={LessonType.ALL.indexOf(settings.get(lessonProps.type))}
         onSelect={(index) => {
@@ -89,14 +90,14 @@ export function LessonSettings(): ReactNode {
       </TabList>
       <LessonLoader>
         {(lesson) => (
-          <>
+          <div className={styles.stack}>
             {tabBody(settings, lesson)}
             <LessonPreview lesson={lesson} />
             <DailyGoalSettings />
-          </>
+          </div>
         )}
       </LessonLoader>
-    </>
+    </div>
   );
 }
 
@@ -125,7 +126,7 @@ function tabBody(settings: Settings, lesson: Lesson): ReactNode {
 
 function ProseLessonSettings() {
   return (
-    <div style={{ padding: "1rem 0" }}>
+    <div className={styles.stack}>
       <p>
         Real prose passages chosen from a curated public-domain corpus, ranked
         by overlap with your slowest bigrams. The first typing-trainer mode that

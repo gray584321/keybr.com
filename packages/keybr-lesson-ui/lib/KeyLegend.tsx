@@ -25,6 +25,7 @@ export const KeyLegend = ({
       {...props}
       className={clsx(
         styles.lessonKey,
+        styles.lessonKeyLegend,
         size === "normal" && styles.lessonKey_normal,
         size === "large" && styles.lessonKey_large,
         isIncluded ? styles.lessonKey_included : styles.lessonKey_excluded,

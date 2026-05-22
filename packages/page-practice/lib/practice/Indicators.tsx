@@ -1,15 +1,17 @@
 import { Tasks } from "@keybr/lang";
 import { type LessonKey } from "@keybr/lesson";
 import {
-  CurrentKeyRow,
-  DailyGoalRow,
-  GaugeRow,
-  KeySetRow,
+  CurrentKey,
+  DailyGoal,
+  EffortLegend,
+  KeySet,
   names,
-  StreakListRow,
+  useEffort,
 } from "@keybr/lesson-ui";
+import { StreakList } from "@keybr/lesson-ui/lib/StreakList.tsx";
 import { Popup, Portal } from "@keybr/widget";
 import { memo, type ReactNode, useEffect, useState } from "react";
+import { useIntl } from "react-intl";
 import { BigramPanel } from "./BigramPanel.tsx";
 import * as styles from "./Indicators.module.less";
 import { KeyExtendedDetails } from "./KeyExtendedDetails.tsx";
@@ -30,6 +32,10 @@ export const Indicators = memo(function Indicators({
    * Current typing speed in CPM, passed by the parent on every keystroke.
    * Indicators is memo'd on `state` (a stable ref), so this explicit prop
    * is needed for live updates to propagate.
+   *
+   * NOTE: in Focus Mode the CPM number is owned by the HUD (rendered by
+   * another component). Kept here only because the prop is still passed
+   * by Presenter and it informs whether the tension chip should render.
    */
   readonly liveSpeed?: number | null;
   /**
@@ -46,8 +52,9 @@ export const Indicators = memo(function Indicators({
    */
   readonly cadenceDeviation?: number | null;
 }): ReactNode {
-  const { keyStatsMap, summaryStats, lessonKeys, streakList, dailyGoal } =
-    state;
+  const { formatMessage } = useIntl();
+  const effort = useEffort();
+  const { keyStatsMap, lessonKeys, streakList, dailyGoal } = state;
   type State = Readonly<
     | { type: "hidden" }
     | { type: "visible-in"; key: LessonKey; elem: Element }
@@ -74,55 +81,114 @@ export const Indicators = memo(function Indicators({
     };
   }, [hover]);
   return (
-    <div id={names.indicators} className={styles.indicators}>
+    <div id={names.indicators} className={styles.rail}>
       <MobileBanner />
       <WarmupCard />
-      <div
-        className={
-          liveSpeed != null
-            ? styles.liveSpeed
-            : `${styles.liveSpeed} ${styles.liveSpeedDim}`
-        }
-        aria-live="off"
-      >
-        {liveSpeed != null ? `${liveSpeed} CPM` : "— CPM"}
-        {tensionRatio != null && (
+      {tensionRatio != null && (
+        <div className={styles.tensionStrip} aria-live="off">
           <span className={tensionClass(tensionRatio)}>
-            {" "}
-            · {tensionLabel(tensionRatio)}
+            {tensionLabel(tensionRatio)}
           </span>
-        )}
-      </div>
+        </div>
+      )}
       <RhythmPacer
         baselineMs={cadenceBaselineMs}
         deviation={cadenceDeviation}
       />
-      <GaugeRow summaryStats={summaryStats} names={names} />
-      <KeySetRow
-        lessonKeys={lessonKeys}
-        names={names}
-        onKeyHoverIn={(key, elem) => {
-          setHover({ type: "visible-in", key, elem });
-        }}
-        onKeyHoverOut={() => {
-          switch (hover.type) {
-            case "visible-in":
-              setHover({ type: "hidden" });
-              break;
-            case "visible":
-              setHover({ ...hover, type: "visible-out" });
-              break;
-          }
-        }}
-      />
-      <CurrentKeyRow lessonKeys={lessonKeys} names={names} />
-      <StreakListRow streakList={streakList} names={names} />
+
+      <section className={styles.card}>
+        <div className={styles.cardHeader}>
+          {formatMessage({
+            id: "t_Current_key",
+            defaultMessage: "Current key",
+          })}
+        </div>
+        <div className={styles.cardBody}>
+          <CurrentKey
+            id={names.currentKey}
+            className={styles.currentKey}
+            lessonKeys={lessonKeys}
+          />
+        </div>
+      </section>
+
+      <section className={styles.card}>
+        <div className={styles.cardHeader}>
+          {formatMessage({
+            id: "t_All_keys",
+            defaultMessage: "All keys",
+          })}
+        </div>
+        <div className={styles.cardBody}>
+          <KeySet
+            id={names.keySet}
+            className={styles.keySet}
+            lessonKeys={lessonKeys}
+            onKeyHoverIn={(key, elem) => {
+              setHover({ type: "visible-in", key, elem });
+            }}
+            onKeyHoverOut={() => {
+              switch (hover.type) {
+                case "visible-in":
+                  setHover({ type: "hidden" });
+                  break;
+                case "visible":
+                  setHover({ ...hover, type: "visible-out" });
+                  break;
+              }
+            }}
+          />
+        </div>
+      </section>
+
+      <section className={styles.card}>
+        <div className={styles.cardHeader}>
+          {formatMessage({
+            id: "t_Accuracy",
+            defaultMessage: "Accuracy",
+          })}
+        </div>
+        <div className={styles.cardBody}>
+          <StreakList
+            id={names.streakList}
+            className={styles.streakList}
+            streakList={streakList}
+          />
+        </div>
+      </section>
+
       {dailyGoal.goal > 0 && (
-        <DailyGoalRow dailyGoal={dailyGoal} names={names} />
+        <section className={styles.card}>
+          <div className={styles.cardHeader}>
+            {formatMessage({
+              id: "t_Daily_goal",
+              defaultMessage: "Daily goal",
+            })}
+          </div>
+          <div className={styles.cardBody}>
+            <DailyGoal
+              id={names.dailyGoal}
+              className={styles.dailyGoal}
+              dailyGoal={dailyGoal}
+            />
+          </div>
+        </section>
       )}
+
       {state.lastLesson != null && (
-        <BigramPanel bigramStats={state.lastLesson.bigramStats} />
+        <section className={styles.card}>
+          <div className={styles.cardBody}>
+            <BigramPanel bigramStats={state.lastLesson.bigramStats} />
+          </div>
+        </section>
       )}
+
+      {dailyGoal.goal > 0 && (
+        <div className={styles.effortLegend}>
+          <EffortLegend effort={effort} />
+        </div>
+      )}
+
       {(hover.type === "visible" || hover.type === "visible-out") && (
         <Portal>
           <Popup

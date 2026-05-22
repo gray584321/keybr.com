@@ -1,59 +1,174 @@
+/* Pre-flight warm-up card. Larger and more inviting before the user
+ * begins typing; collapses to a small pill once warm-up is running. */
 .card {
-  margin-block-end: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border-color, rgba(128, 128, 128, 0.3));
-  border-radius: 4px;
-  background: var(--card-bg, rgba(255, 255, 255, 0.02));
-  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-block-end: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2, var(--background-color));
+  box-shadow: var(--shadow-md);
+  animation: cardIn var(--motion-base, 240ms) var(--easing-decel, ease-out);
 }
 
 .heading {
-  margin-block-end: 0.4rem;
-  opacity: 0.85;
-  font-weight: 600;
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.subheading {
+  max-inline-size: 48ch;
+  margin: 0;
+  color: var(--text-color-f1, var(--text-color));
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 
 .target {
-  padding: 0.2rem 0;
+  padding-block: var(--space-2);
   font-family: var(--monospace-font-family, monospace);
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  word-spacing: 0.25em;
 }
 
 .typed {
-  opacity: 0.55;
+  opacity: 0.45;
   text-decoration: line-through;
+  text-decoration-color: var(--text-color-f2, currentColor);
 }
 
 .untyped {
+  color: var(--text-color);
   opacity: 1;
 }
 
 .input {
   inline-size: 100%;
-  margin-block-start: 0.4rem;
-  padding: 0.3rem 0.5rem;
-  border: 1px solid var(--border-color, rgba(128, 128, 128, 0.3));
-  border-radius: 3px;
+  padding-inline: var(--space-3);
+  padding-block: var(--space-2);
+  border: 1px solid var(--separator-color);
+  border-radius: var(--radius-md);
   color: inherit;
-  background: transparent;
+  background: var(--surface-sunken, transparent);
   font-family: var(--monospace-font-family, monospace);
+  font-size: 1rem;
+  transition: border-color var(--motion-fast, 120ms)
+    var(--easing-standard, ease);
+}
+
+.input:focus-visible {
+  border-color: transparent;
+  outline: 2px solid var(--ring-focus, var(--accent));
+  outline-offset: 1px;
 }
 
 .footer {
-  margin-block-start: 0.4rem;
-  text-align: end;
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hint {
+  color: var(--text-color-f2, var(--text-color));
+  font-size: 0.8rem;
 }
 
 .skip {
+  padding-inline: var(--space-2);
+  padding-block: var(--space-1);
   border: none;
+  border-radius: var(--radius-sm);
   color: inherit;
   background: none;
   opacity: 0.7;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   cursor: pointer;
+  transition: opacity var(--motion-fast, 120ms) var(--easing-standard, ease);
 }
 
-.skip:hover {
+.skip:hover,
+.skip:focus-visible {
   opacity: 1;
+}
+
+.skip:focus-visible {
+  outline: 2px solid var(--ring-focus, var(--accent));
+  outline-offset: 1px;
+}
+
+/* Minimized pill — shown while warm-up is in progress. */
+.pill {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin-block-end: var(--space-3);
+  padding-inline: var(--space-3);
+  padding-block: var(--space-1);
+  border: 1px solid var(--separator-color);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2, var(--background-color));
+  box-shadow: var(--shadow-sm);
+  font-size: 0.85rem;
+  animation: pillIn var(--motion-base, 240ms) var(--easing-decel, ease-out);
+}
+
+.pillLabel {
+  color: var(--text-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.pillSkip {
+  composes: skip;
+  padding-inline: var(--space-2);
+  padding-block: 0;
+  color: var(--accent, currentColor);
+  opacity: 0.85;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.ring {
+  flex-shrink: 0;
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+.ringTrack {
+  stroke: var(--separator-color);
+  opacity: 0.5;
+}
+
+.ringProgress {
+  stroke: var(--accent);
+  transition: stroke-dashoffset var(--motion-fast, 120ms) linear;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pillIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

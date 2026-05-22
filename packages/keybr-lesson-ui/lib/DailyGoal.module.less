@@ -1,25 +1,104 @@
-.root {
+.rootRing {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.ring {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  inline-size: 4rem;
+  block-size: 4rem;
+}
+
+.ringSvg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  transform: rotate(0deg);
+}
+
+.ringTrack {
+  stroke: var(
+    --surface-sunken,
+    var(--DailyGoal-frame__color, var(--primary-d1))
+  );
+  opacity: 0.6;
+}
+
+.ringFill {
+  stroke: var(--accent, var(--DailyGoal-bar__color, var(--primary-l2)));
+  transition:
+    stroke-dashoffset var(--motion-base, 240ms) var(--easing-decel, ease-out),
+    stroke var(--motion-fast, 120ms) var(--easing-standard, ease);
+}
+
+.ringFillComplete {
+  stroke: var(--Value--more__color);
+}
+
+.ringCenter {
   display: flex;
-  gap: 1rem;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ringValue {
+  color: var(--text-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.ringSrLabel {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.rootBar {
+  display: flex;
+  gap: var(--space-4, 1rem);
   align-items: center;
   max-inline-size: 40rem;
 }
 
-.gauge {
+.bar {
   position: relative;
   flex: 1;
   inline-size: 100%;
   block-size: 8px;
+  border-radius: var(--radius-pill, 999px);
+  overflow: hidden;
 }
 
-.bar {
+.barFill {
   position: absolute;
-  block-size: 8px;
-  background-color: var(--DailyGoal-bar__color);
+  block-size: 100%;
+  border-radius: var(--radius-pill, 999px);
+  background-color: var(
+    --accent,
+    var(--DailyGoal-bar__color, var(--primary-l2))
+  );
+  transition: inline-size var(--motion-base, 240ms)
+    var(--easing-decel, ease-out);
 }
 
-.frame {
+.barFrame {
   position: absolute;
-  block-size: 8px;
-  border: 1px solid var(--DailyGoal-frame__color);
+  block-size: 100%;
+  border: 1px solid
+    var(--surface-sunken, var(--DailyGoal-frame__color, var(--primary-d2)));
+  border-radius: var(--radius-pill, 999px);
+  pointer-events: none;
 }

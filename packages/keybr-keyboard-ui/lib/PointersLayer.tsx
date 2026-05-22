@@ -100,23 +100,32 @@ function pointer(shape: KeyShape | null, className: string): ReactNode {
   }
   const { x, y } = getKeyCenter(shape);
   const pointerSize = 30;
+  // keySplines matches the --easing-emphasized token (cubic-bezier(0.16, 1, 0.3, 1))
+  // for a smoother, decelerating ring + a faint outward pulse overshoot.
+  const splineEmphasized = "0.16 1 0.3 1";
   return (
     <circle className={className} cx={x} cy={y} r={pointerSize}>
       <animate
         attributeName="opacity"
-        from={0}
-        to={1}
-        dur="0.5s"
+        values="0;1;0.85"
+        keyTimes="0;0.7;1"
+        dur="0.55s"
+        calcMode="spline"
+        keySplines={`${splineEmphasized};${splineEmphasized}`}
         repeatCount="1"
         restart="always"
+        fill="freeze"
       />
       <animate
         attributeName="r"
-        from={0}
-        to={pointerSize}
-        dur="0.5s"
+        values={`0;${pointerSize * 1.08};${pointerSize}`}
+        keyTimes="0;0.7;1"
+        dur="0.55s"
+        calcMode="spline"
+        keySplines={`${splineEmphasized};${splineEmphasized}`}
         repeatCount="1"
         restart="always"
+        fill="freeze"
       />
     </circle>
   );

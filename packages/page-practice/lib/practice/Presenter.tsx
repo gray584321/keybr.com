@@ -10,8 +10,9 @@ import {
 } from "@keybr/textinput-events";
 import { TextArea } from "@keybr/textinput-ui";
 import { type Focusable, Zoomer } from "@keybr/widget";
-import { createRef, PureComponent, type ReactNode } from "react";
+import { createRef, PureComponent } from "react";
 import { Controls } from "./Controls.tsx";
+import { HUD } from "./HUD.tsx";
 import { Indicators } from "./Indicators.tsx";
 import { DeferredKeyboardPresenter } from "./KeyboardPresenter.tsx";
 import { PracticeTour } from "./PracticeTour.tsx";
@@ -52,6 +53,17 @@ function getNextView(view: View): View {
   }
 }
 
+function viewClass(view: View): string {
+  switch (view) {
+    case View.Normal:
+      return styles.viewNormal;
+    case View.Compact:
+      return styles.viewCompact;
+    case View.Bare:
+      return styles.viewBare;
+  }
+}
+
 const propView = enumProp("prefs.practice.view", View, View.Normal);
 
 export class Presenter extends PureComponent<Props, State> {
@@ -87,106 +99,92 @@ export class Presenter extends PureComponent<Props, State> {
       handleHelp,
       handleTourClose,
     } = this;
-    switch (view) {
-      case View.Normal:
-        return (
-          <NormalLayout
-            state={state}
-            focus={tour || focus}
-            depressedKeys={depressedKeys}
-            toggledKeys={ModifierState.modifiers}
-            controls={
-              <Controls
-                onChangeView={handleChangeView}
-                onResetLesson={handleResetLesson}
-                onSkipLesson={handleSkipLesson}
-                onHelp={handleHelp}
-              />
-            }
-            textInput={
-              <Zoomer id="TextArea/Normal">
-                <TextArea
-                  focusRef={this.focusRef}
-                  settings={state.textDisplaySettings}
-                  lines={lines}
-                  size="X0"
-                  demo={tour}
-                  onFocus={handleFocus}
-                  onBlur={handleBlur}
-                  onKeyDown={handleKeyDown}
-                  onKeyUp={handleKeyUp}
-                  onInput={handleInput}
+
+    const textAreaSize =
+      view === View.Bare ? "X2" : view === View.Compact ? "X1" : "X0";
+    const textAreaClass =
+      view === View.Bare
+        ? styles.textInputBare
+        : view === View.Compact
+          ? styles.textInputCompact
+          : styles.textInputNormal;
+
+    const controls = (
+      <Controls
+        onChangeView={handleChangeView}
+        onResetLesson={handleResetLesson}
+        onSkipLesson={handleSkipLesson}
+        onHelp={handleHelp}
+      />
+    );
+
+    const textInput = (
+      <Zoomer id={`TextArea/${View[view]}`}>
+        <TextArea
+          focusRef={this.focusRef}
+          settings={state.textDisplaySettings}
+          lines={lines}
+          size={textAreaSize}
+          demo={tour}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+          onInput={handleInput}
+        />
+      </Zoomer>
+    );
+
+    return (
+      <Screen className={styles.screen}>
+        <div className={`${styles.layout} ${viewClass(view)}`}>
+          {view !== View.Bare && (
+            <div className={styles.hudArea}>
+              <HUD state={state} liveSpeed={state.currentSpeed} />
+            </div>
+          )}
+
+          <div
+            id={names.textInput}
+            className={`${styles.textArea} ${textAreaClass}`}
+          >
+            {textInput}
+          </div>
+
+          {view === View.Normal && (
+            <div id={names.keyboard} className={styles.keyboardArea}>
+              <Zoomer id="Keyboard/Normal">
+                <DeferredKeyboardPresenter
+                  focus={tour || focus}
+                  depressedKeys={depressedKeys}
+                  toggledKeys={ModifierState.modifiers}
+                  suffix={state.suffix}
+                  lastLesson={state.lastLesson}
                 />
               </Zoomer>
-            }
-            tour={tour && <PracticeTour onClose={handleTourClose} />}
-          />
-        );
-      case View.Compact:
-        return (
-          <CompactLayout
-            state={state}
-            focus={tour || focus}
-            depressedKeys={depressedKeys}
-            controls={
-              <Controls
-                onChangeView={handleChangeView}
-                onResetLesson={handleResetLesson}
-                onSkipLesson={handleSkipLesson}
-                onHelp={handleHelp}
+            </div>
+          )}
+
+          {view !== View.Bare && (
+            <div className={styles.railArea}>
+              <Indicators
+                state={state}
+                liveSpeed={state.currentSpeed}
+                tensionRatio={state.tensionRatio}
+                cadenceBaselineMs={state.cadenceBaselineMs}
+                cadenceDeviation={state.cadenceDeviation}
               />
-            }
-            textInput={
-              <Zoomer id="TextArea/Compact">
-                <TextArea
-                  focusRef={this.focusRef}
-                  settings={state.textDisplaySettings}
-                  lines={lines}
-                  size="X1"
-                  demo={tour}
-                  onFocus={handleFocus}
-                  onBlur={handleBlur}
-                  onKeyDown={handleKeyDown}
-                  onKeyUp={handleKeyUp}
-                  onInput={handleInput}
-                />
-              </Zoomer>
-            }
-          />
-        );
-      case View.Bare:
-        return (
-          <BareLayout
-            state={state}
-            focus={tour || focus}
-            depressedKeys={depressedKeys}
-            controls={
-              <Controls
-                onChangeView={handleChangeView}
-                onResetLesson={handleResetLesson}
-                onSkipLesson={handleSkipLesson}
-                onHelp={handleHelp}
-              />
-            }
-            textInput={
-              <Zoomer id="TextArea/Bare">
-                <TextArea
-                  focusRef={this.focusRef}
-                  settings={state.textDisplaySettings}
-                  lines={lines}
-                  size="X2"
-                  demo={tour}
-                  onFocus={handleFocus}
-                  onBlur={handleBlur}
-                  onKeyDown={handleKeyDown}
-                  onKeyUp={handleKeyUp}
-                  onInput={handleInput}
-                />
-              </Zoomer>
-            }
-          />
-        );
-    }
+            </div>
+          )}
+
+          <div className={styles.dockArea}>{controls}</div>
+
+          {view === View.Normal && tour && (
+            <PracticeTour onClose={handleTourClose} />
+          )}
+        </div>
+      </Screen>
+    );
   }
 
   handleResetLesson = () => {
@@ -278,99 +276,4 @@ export class Presenter extends PureComponent<Props, State> {
       },
     );
   };
-}
-
-function NormalLayout({
-  state,
-  focus,
-  depressedKeys,
-  toggledKeys,
-  controls,
-  textInput,
-  tour,
-}: {
-  readonly state: LessonState;
-  readonly focus: boolean;
-  readonly depressedKeys: readonly string[];
-  readonly toggledKeys: readonly string[];
-  readonly controls: ReactNode;
-  readonly textInput: ReactNode;
-  readonly tour: ReactNode;
-}) {
-  return (
-    <Screen>
-      <Indicators
-        state={state}
-        liveSpeed={state.currentSpeed}
-        tensionRatio={state.tensionRatio}
-        cadenceBaselineMs={state.cadenceBaselineMs}
-        cadenceDeviation={state.cadenceDeviation}
-      />
-      <div id={names.textInput} className={styles.textInput_normal}>
-        {textInput}
-      </div>
-      <div id={names.keyboard} className={styles.keyboard}>
-        <Zoomer id="Keyboard/Normal">
-          <DeferredKeyboardPresenter
-            focus={focus}
-            depressedKeys={depressedKeys}
-            toggledKeys={toggledKeys}
-            suffix={state.suffix}
-            lastLesson={state.lastLesson}
-          />
-        </Zoomer>
-      </div>
-      {controls}
-      {tour}
-    </Screen>
-  );
-}
-
-function CompactLayout({
-  state,
-  controls,
-  textInput,
-}: {
-  readonly state: LessonState;
-  readonly focus: boolean;
-  readonly depressedKeys: readonly string[];
-  readonly controls: ReactNode;
-  readonly textInput: ReactNode;
-}) {
-  return (
-    <Screen>
-      <Indicators
-        state={state}
-        liveSpeed={state.currentSpeed}
-        tensionRatio={state.tensionRatio}
-        cadenceBaselineMs={state.cadenceBaselineMs}
-        cadenceDeviation={state.cadenceDeviation}
-      />
-      <div id={names.textInput} className={styles.textInput_compact}>
-        {textInput}
-      </div>
-      {controls}
-    </Screen>
-  );
-}
-
-function BareLayout({
-  state,
-  controls,
-  textInput,
-}: {
-  readonly state: LessonState;
-  readonly focus: boolean;
-  readonly depressedKeys: readonly string[];
-  readonly controls: ReactNode;
-  readonly textInput: ReactNode;
-}) {
-  return (
-    <Screen>
-      <div id={names.textInput} className={styles.textInput_bare}>
-        {textInput}
-      </div>
-      {controls}
-    </Screen>
-  );
 }

@@ -1,23 +1,47 @@
 .root {
   contain: content;
   position: relative;
-  margin-inline: -1rem;
-  margin-block: -1rem;
-  padding-inline: 1rem;
-  padding-block: 1rem;
+  margin-inline: calc(-1 * var(--space-4, 1rem));
+  margin-block: calc(-1 * var(--space-4, 1rem));
+  padding-inline: var(--space-4, 1rem);
+  padding-block: var(--space-4, 1rem);
+  border-radius: var(--radius-lg, 12px);
+  transition:
+    background-color var(--motion-base, 220ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1)),
+    box-shadow var(--motion-base, 220ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 .messageArea {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-block-start: var(--space-3, 1rem);
+  pointer-events: none;
 }
 
 .messageText {
-  padding-inline: 2rem;
-  padding-block: 0.5rem;
+  padding-inline: var(--space-5, 2rem);
+  padding-block: var(--space-2, 0.5rem);
   border: var(--separator-border);
+  border-radius: var(--radius-pill, 999px);
   color: var(--Popup__color);
   background-color: var(--Popup__background-color);
-  box-shadow: var(--Popup--small__box-shadow);
+  box-shadow: var(--shadow-md, var(--Popup--small__box-shadow));
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  animation: messagePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes messagePulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.92;
+    transform: translateY(-2px);
+  }
 }

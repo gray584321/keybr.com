@@ -1,10 +1,11 @@
 import { FormattedMessage } from "react-intl";
 import { KeyLegend } from "./KeyLegend.tsx";
+import * as styles from "./styles.module.less";
 
 export const KeyLegendList = () => {
   return (
-    <ul>
-      <li>
+    <ul className={styles.keyLegendList}>
+      <li className={styles.keyLegendItem}>
         <KeyLegend //
           isIncluded={true}
           confidence={null}
@@ -16,7 +17,7 @@ export const KeyLegendList = () => {
           defaultMessage="A non-calibrated key with an unknown confidence level. You still have not pressed this key yet."
         />
       </li>
-      <li>
+      <li className={styles.keyLegendItem}>
         <KeyLegend //
           isIncluded={true}
           confidence={0}
@@ -28,7 +29,7 @@ export const KeyLegendList = () => {
           defaultMessage="A calibrated key with the lowest confidence level. The more times you press this key, the more accurate this metric becomes."
         />
       </li>
-      <li>
+      <li className={styles.keyLegendItem}>
         <KeyLegend //
           isIncluded={true}
           confidence={1}
@@ -40,7 +41,7 @@ export const KeyLegendList = () => {
           defaultMessage="A calibrated key with the highest confidence level. The more times you press this key, the more accurate this metric becomes."
         />
       </li>
-      <li>
+      <li className={styles.keyLegendItem}>
         <KeyLegend //
           isIncluded={true}
           confidence={0.3}
@@ -52,7 +53,7 @@ export const KeyLegendList = () => {
           defaultMessage="A key with increased frequency. It takes you the most time to find this key so the algorithm chose it to be included in every generated word."
         />
       </li>
-      <li>
+      <li className={styles.keyLegendItem}>
         <KeyLegend //
           isIncluded={true}
           confidence={null}
@@ -64,7 +65,7 @@ export const KeyLegendList = () => {
           defaultMessage="A key which was manually included in the lessons."
         />
       </li>
-      <li>
+      <li className={styles.keyLegendItem}>
         <KeyLegend //
           isIncluded={false}
           confidence={null}

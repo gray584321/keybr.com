@@ -1,13 +1,26 @@
+.root {
+  display: inline-flex;
+  gap: var(--space-1, 0.25rem);
+  align-items: center;
+  vertical-align: middle;
+}
+
 .icon {
   inline-size: 1rem;
   block-size: 1rem;
   fill: var(--text-color);
+  opacity: 0.35;
+  transition: opacity var(--motion-fast, 120ms) var(--easing-standard, ease);
 }
 
-.happy .icon {
+.iconActive {
+  opacity: 1;
+}
+
+.happy .iconActive {
   fill: var(--Value--more__color);
 }
 
-.sad .icon {
+.sad .iconActive {
   fill: var(--Value--less__color);
 }

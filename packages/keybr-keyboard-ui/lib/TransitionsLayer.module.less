@@ -4,30 +4,41 @@
 
 .arc {
   fill: none;
+  stroke-linejoin: round;
+  // Softer arc terminations + a gentle blur-free transition on opacity.
+  stroke-linecap: round;
+  transition:
+    opacity var(--motion-base, 200ms) var(--easing-emphasized, ease-out),
+    stroke-width var(--motion-base, 200ms) var(--easing-emphasized, ease-out);
 }
 
 .h {
   stroke: var(--Chart-hist-h__color);
-  stroke-width: 2px;
+  stroke-width: 1.5px;
+  opacity: 0.85;
 }
 
 .m {
   stroke: var(--Chart-hist-m__color);
-  stroke-width: 2px;
+  stroke-width: 1.5px;
+  opacity: 0.85;
 }
 
 .f {
   stroke: var(--text-color);
   stroke-width: 1px;
+  opacity: 0.75;
 }
 
 .sfb {
   stroke: var(--Chart-hist-m__color);
-  stroke-width: 2.5px;
+  stroke-width: 2px;
+  opacity: 0.9;
 }
 
 .fAlt {
   stroke: var(--text-color);
   stroke-width: 0.5px;
-  opacity: 0.4;
+  stroke-dasharray: 2px 2px;
+  opacity: 0.3;
 }

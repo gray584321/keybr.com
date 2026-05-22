@@ -46,16 +46,12 @@ export const SpeedGauge = memo(function SpeedGauge({
         />
       }
       value={<Value value={formatSpeed(last)} />}
-      delta={
-        <Value
-          value={signed(formatSpeed(delta), delta)}
-          delta={delta}
-          title={formatMessage({
-            id: "metric.difference.description",
-            defaultMessage: "The difference from the average value.",
-          })}
-        />
-      }
+      delta={delta}
+      deltaText={formatSpeed(delta)}
+      deltaTitle={formatMessage({
+        id: "metric.difference.description",
+        defaultMessage: "The difference from the average value.",
+      })}
       title={formatMessage({
         id: "metric.speed.description",
         defaultMessage: "Typing speed in the last lesson.",
@@ -86,16 +82,12 @@ export const AccuracyGauge = memo(function AccuracyGauge({
         />
       }
       value={<Value value={formatPercents(last)} />}
-      delta={
-        <Value
-          value={signed(formatPercents(delta), delta)}
-          delta={delta}
-          title={formatMessage({
-            id: "metric.difference.description",
-            defaultMessage: "The difference from the average value.",
-          })}
-        />
-      }
+      delta={delta}
+      deltaText={formatPercents(delta)}
+      deltaTitle={formatMessage({
+        id: "metric.difference.description",
+        defaultMessage: "The difference from the average value.",
+      })}
       title={formatMessage({
         id: "metric.accuracy.description",
         defaultMessage:
@@ -127,16 +119,12 @@ export const ScoreGauge = memo(function ScoreGauge({
         />
       }
       value={<Value value={formatNumber(last, 0)} />}
-      delta={
-        <Value
-          value={signed(formatNumber(delta, 0), delta)}
-          delta={delta}
-          title={formatMessage({
-            id: "metric.difference.description",
-            defaultMessage: "The difference from the average value.",
-          })}
-        />
-      }
+      delta={delta}
+      deltaText={formatNumber(delta, 0)}
+      deltaTitle={formatMessage({
+        id: "metric.difference.description",
+        defaultMessage: "The difference from the average value.",
+      })}
       title={formatMessage({
         id: "metric.score.description",
         defaultMessage:
@@ -153,29 +141,65 @@ export const Gauge = memo(function Gauge({
   name,
   value,
   delta,
+  deltaText,
+  deltaTitle,
   title,
 }: {
   id?: string;
   className?: ClassName;
   name: ReactNode;
   value: ReactNode;
-  delta: ReactNode;
+  // Backwards-compatible: callers can pass a number (preferred, used for
+  // styling the delta arrow + color) or a fully-built ReactNode.
+  delta: number | ReactNode;
+  deltaText?: string;
+  deltaTitle?: string;
   title: string;
 }) {
+  const deltaContent =
+    typeof delta === "number" && deltaText != null ? (
+      <DeltaIndicator delta={delta} text={deltaText} title={deltaTitle} />
+    ) : (
+      delta
+    );
   return (
     <span id={id} className={clsx(styles.gauge, className)} title={title}>
-      {name} {value} ({delta})
+      <span className={styles.gaugeMain}>
+        {name}
+        <span className={styles.gaugeValue}>{value}</span>
+      </span>
+      {deltaContent}
     </span>
   );
 });
 
-function signed(value: any, delta: number): string {
-  const s = String(value);
-  if (delta > 0) {
-    return `\u2191+${s}`;
-  }
-  if (delta < 0) {
-    return `\u2193${s}`;
-  }
-  return s;
+function DeltaIndicator({
+  delta,
+  text,
+  title,
+}: {
+  delta: number;
+  text: string;
+  title?: string;
+}) {
+  const sign = delta > 0 ? "positive" : delta < 0 ? "negative" : "neutral";
+  const arrow = delta > 0 ? "↑" : delta < 0 ? "↓" : "";
+  const prefix = delta > 0 ? "+" : "";
+  return (
+    <span
+      className={clsx(
+        styles.gaugeDelta,
+        sign === "positive" && styles.gaugeDeltaPositive,
+        sign === "negative" && styles.gaugeDeltaNegative,
+        sign === "neutral" && styles.gaugeDeltaNeutral,
+      )}
+      title={title}
+    >
+      {arrow && <span className={styles.gaugeDeltaArrow}>{arrow}</span>}
+      <span>
+        {prefix}
+        {text}
+      </span>
+    </span>
+  );
 }

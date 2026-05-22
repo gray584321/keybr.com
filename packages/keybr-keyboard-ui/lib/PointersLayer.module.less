@@ -1,14 +1,25 @@
 .pointer {
   fill: transparent;
   stroke: var(--KeyboardKey-pointer__color);
-  stroke-opacity: 0.5;
-  stroke-width: 5px;
+  stroke-opacity: 0.55;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  // Soft round terminations make the ring feel less hard-edged.
+  stroke-linecap: round;
+  // Subtle outer glow gives the pulse a softer halo without geometry change.
+  filter: drop-shadow(0 0 3px rgb(0 0 0 / 12%));
+  transition: stroke-opacity var(--motion-base, 200ms)
+    var(--easing-emphasized, ease-out);
 }
 
 .modifierPointer {
   fill: transparent;
   stroke: var(--KeyboardKey-pointer__color);
-  stroke-opacity: 0.5;
-  stroke-width: 3px;
-  stroke-dasharray: 3px;
+  stroke-opacity: 0.45;
+  stroke-width: 2.5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 4px 3px;
+  transition: stroke-opacity var(--motion-base, 200ms)
+    var(--easing-emphasized, ease-out);
 }

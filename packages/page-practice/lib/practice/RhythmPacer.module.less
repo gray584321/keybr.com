@@ -1,19 +1,34 @@
-.row {
-  display: flex;
-  gap: 0.5rem;
+/* Rhythm pacer. A small drifting dot that pulses at the user's
+ * cadence baseline; the optional "steady / ease off" label is hidden
+ * by default and revealed on hover (or focus-within for keyboards). */
+.base {
+  display: inline-flex;
+  gap: var(--space-2);
   align-items: center;
-  margin-block-start: 0.5rem;
-  padding-inline: 0.5rem;
-  opacity: 0.6;
-  font-size: 0.7rem;
+  pointer-events: auto;
   user-select: none;
 }
 
+.floating {
+  composes: base;
+  position: absolute;
+  inset-inline-end: var(--space-2);
+  inset-block-start: var(--space-2);
+}
+
+.inline {
+  composes: base;
+  margin-block-start: var(--space-1);
+}
+
 .dot {
-  inline-size: 8px;
-  block-size: 8px;
-  border-radius: 50%;
-  background: var(--text-color, currentColor);
+  inline-size: 7px;
+  block-size: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--accent, currentColor);
+  box-shadow: 0 0 6px var(--accent-l2, transparent);
+  transition: background-color var(--motion-fast, 120ms)
+    var(--easing-standard, ease);
   animation-name: pulse;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
@@ -21,28 +36,47 @@
 
 .dotDimmed {
   composes: dot;
-  background: var(--Chart-hist-m__color, currentColor);
+  background: var(--text-color-f2, currentColor);
+  box-shadow: none;
   opacity: 0.4;
 }
 
 .label {
+  color: var(--text-color-f2, currentColor);
+  opacity: 0;
+  visibility: hidden;
+  font-size: 0.7rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  transition: opacity var(--motion-fast, 120ms) var(--easing-standard, ease);
+}
+
+.base:hover .label,
+.base:focus-within .label {
+  opacity: 0.7;
+  visibility: visible;
 }
 
 @keyframes pulse {
   0% {
-    opacity: 0.4;
+    opacity: 0.45;
     transform: scale(0.7);
   }
 
   50% {
     opacity: 1;
-    transform: scale(1.2);
+    transform: scale(1.25);
   }
 
   100% {
-    opacity: 0.4;
+    opacity: 0.45;
     transform: scale(0.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .dotDimmed {
+    animation: none;
   }
 }

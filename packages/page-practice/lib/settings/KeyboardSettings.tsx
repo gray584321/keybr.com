@@ -19,19 +19,19 @@ import {
   CheckBox,
   Description,
   Explainer,
-  Field,
-  FieldList,
   FieldSet,
   OptionList,
 } from "@keybr/widget";
 import { memo, type ReactNode, useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import * as styles from "./SettingsLayout.module.less";
 
 export function KeyboardSettings(): ReactNode {
   const { formatMessage } = useIntl();
   return (
     <>
       <FieldSet
+        className={styles.section}
         legend={formatMessage({
           id: "t_Options",
           defaultMessage: "Options",
@@ -40,12 +40,15 @@ export function KeyboardSettings(): ReactNode {
         <LayoutProp />
       </FieldSet>
       <FieldSet
+        className={styles.section}
         legend={formatMessage({
           id: "t_Preview",
           defaultMessage: "Preview",
         })}
       >
-        <KeyboardPreview />
+        <div className={styles.preview}>
+          <KeyboardPreview />
+        </div>
         <GeometryProp />
       </FieldSet>
     </>
@@ -64,11 +67,11 @@ function LayoutProp(): ReactNode {
   const options = KeyboardOptions.from(settings);
   return (
     <>
-      <FieldList>
-        <Field>
+      <div className={styles.grid}>
+        <div className={styles.label}>
           <FormattedMessage id="t_Language:" defaultMessage="Language:" />
-        </Field>
-        <Field>
+        </div>
+        <div className={styles.control}>
           <OptionList
             options={options
               .selectableLanguages()
@@ -88,11 +91,11 @@ function LayoutProp(): ReactNode {
               );
             }}
           />
-        </Field>
-        <Field>
+        </div>
+        <div className={styles.label}>
           <FormattedMessage id="t_Layout:" defaultMessage="Layout:" />
-        </Field>
-        <Field>
+        </div>
+        <div className={styles.control}>
           <OptionList
             options={options.selectableLayouts().map((item) => ({
               value: item.id,
@@ -112,30 +115,26 @@ function LayoutProp(): ReactNode {
               );
             }}
           />
-        </Field>
-      </FieldList>
-      <FieldList>
-        <Field>
-          <CheckBox
-            checked={
-              settings.get(keyboardProps.emulation) === Emulation.Forward
-            }
-            disabled={!options.layout.emulate}
-            label={formatMessage({
-              id: "t_Emulate_layout",
-              defaultMessage: "Emulate layout",
-            })}
-            onChange={(value) => {
-              updateSettings(
-                settings.set(
-                  keyboardProps.emulation,
-                  value ? Emulation.Forward : Emulation.None,
-                ),
-              );
-            }}
-          />
-        </Field>
-      </FieldList>
+        </div>
+      </div>
+      <div className={styles.row}>
+        <CheckBox
+          checked={settings.get(keyboardProps.emulation) === Emulation.Forward}
+          disabled={!options.layout.emulate}
+          label={formatMessage({
+            id: "t_Emulate_layout",
+            defaultMessage: "Emulate layout",
+          })}
+          onChange={(value) => {
+            updateSettings(
+              settings.set(
+                keyboardProps.emulation,
+                value ? Emulation.Forward : Emulation.None,
+              ),
+            );
+          }}
+        />
+      </div>
       <Explainer>
         <Description>
           <FormattedMessage
@@ -144,28 +143,24 @@ function LayoutProp(): ReactNode {
           />
         </Description>
       </Explainer>
-      <FieldList>
-        <Field>
-          <CheckBox
-            checked={
-              settings.get(keyboardProps.emulation) === Emulation.Reverse
-            }
-            disabled={!options.layout.emulate}
-            label={formatMessage({
-              id: "t_Keyboard_hardware_emulates_",
-              defaultMessage: "Keyboard hardware emulates layout",
-            })}
-            onChange={(value) => {
-              updateSettings(
-                settings.set(
-                  keyboardProps.emulation,
-                  value ? Emulation.Reverse : Emulation.None,
-                ),
-              );
-            }}
-          />
-        </Field>
-      </FieldList>
+      <div className={styles.row}>
+        <CheckBox
+          checked={settings.get(keyboardProps.emulation) === Emulation.Reverse}
+          disabled={!options.layout.emulate}
+          label={formatMessage({
+            id: "t_Keyboard_hardware_emulates_",
+            defaultMessage: "Keyboard hardware emulates layout",
+          })}
+          onChange={(value) => {
+            updateSettings(
+              settings.set(
+                keyboardProps.emulation,
+                value ? Emulation.Reverse : Emulation.None,
+              ),
+            );
+          }}
+        />
+      </div>
       <Explainer>
         <Description>
           <FormattedMessage
@@ -184,11 +179,11 @@ function GeometryProp(): ReactNode {
   const options = KeyboardOptions.from(settings);
   return (
     <>
-      <FieldList>
-        <Field>
+      <div className={styles.grid}>
+        <div className={styles.label}>
           <FormattedMessage id="t_Geometry:" defaultMessage="Geometry:" />
-        </Field>
-        <Field>
+        </div>
+        <div className={styles.control}>
           <OptionList
             options={options.selectableGeometries().map((item) => ({
               value: item.id,
@@ -204,11 +199,11 @@ function GeometryProp(): ReactNode {
               );
             }}
           />
-        </Field>
-        <Field>
+        </div>
+        <div className={styles.label}>
           <FormattedMessage id="t_Zones:" defaultMessage="Zones:" />
-        </Field>
-        <Field>
+        </div>
+        <div className={styles.control}>
           <OptionList
             options={options.selectableZones().map((item) => ({
               value: item.id,
@@ -221,22 +216,20 @@ function GeometryProp(): ReactNode {
               );
             }}
           />
-        </Field>
-      </FieldList>
-      <FieldList>
-        <Field>
-          <CheckBox
-            label={formatMessage({
-              id: "t_Colored_keys",
-              defaultMessage: "Colored keys",
-            })}
-            checked={settings.get(keyboardProps.colors)}
-            onChange={(value) => {
-              updateSettings(settings.set(keyboardProps.colors, value));
-            }}
-          />
-        </Field>
-      </FieldList>
+        </div>
+      </div>
+      <div className={styles.row}>
+        <CheckBox
+          label={formatMessage({
+            id: "t_Colored_keys",
+            defaultMessage: "Colored keys",
+          })}
+          checked={settings.get(keyboardProps.colors)}
+          onChange={(value) => {
+            updateSettings(settings.set(keyboardProps.colors, value));
+          }}
+        />
+      </div>
       <Explainer>
         <Description>
           <FormattedMessage
@@ -245,20 +238,18 @@ function GeometryProp(): ReactNode {
           />
         </Description>
       </Explainer>
-      <FieldList>
-        <Field>
-          <CheckBox
-            label={formatMessage({
-              id: "t_Highlight_keys",
-              defaultMessage: "Highlight keys",
-            })}
-            checked={settings.get(keyboardProps.pointers)}
-            onChange={(value) => {
-              updateSettings(settings.set(keyboardProps.pointers, value));
-            }}
-          />
-        </Field>
-      </FieldList>
+      <div className={styles.row}>
+        <CheckBox
+          label={formatMessage({
+            id: "t_Highlight_keys",
+            defaultMessage: "Highlight keys",
+          })}
+          checked={settings.get(keyboardProps.pointers)}
+          onChange={(value) => {
+            updateSettings(settings.set(keyboardProps.pointers, value));
+          }}
+        />
+      </div>
       <Explainer>
         <Description>
           <FormattedMessage

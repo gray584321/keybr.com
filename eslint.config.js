@@ -21,6 +21,7 @@ export default [
       "**/build/",
       "**/sandbox/",
       "**/tmp/",
+      ".claude/",
       "root/",
       "packages/keybr-code/lib/parser.js",
       "packages/keybr-code/lib/syntax/_*.ts",

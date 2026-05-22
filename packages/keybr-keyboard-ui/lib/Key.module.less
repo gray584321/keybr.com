@@ -1,5 +1,16 @@
 .button {
   fill: var(--KeyboardKey-button__color);
+  stroke: var(--surface-sunken, var(--primary-d1));
+  stroke-opacity: 0.45;
+  stroke-width: 0.5px;
+  transition:
+    fill var(--motion-fast, 120ms) var(--easing-emphasized, ease-out),
+    stroke-opacity var(--motion-fast, 120ms) var(--easing-emphasized, ease-out),
+    filter var(--motion-fast, 120ms) var(--easing-emphasized, ease-out);
+  // Soft cap appearance: rounded corners + transitions on color/opacity.
+  // Geometry stays untouched; only the visual cap edge softens.
+  rx: 3px;
+  ry: 3px;
 }
 
 .symbol {
@@ -8,6 +19,7 @@
   font-size: 10px;
   cursor: default;
   user-select: none;
+  transition: fill var(--motion-fast, 120ms) var(--easing-emphasized, ease-out);
 }
 
 .primarySymbol {
@@ -29,6 +41,7 @@
 
 .bump {
   fill: var(--KeyboardKey-symbol__color);
+  opacity: 0.7;
 }
 
 .handLeft {
@@ -92,6 +105,10 @@
 .depressedKey {
   .button {
     fill: var(--KeyboardKey-button--depressed__color);
+    stroke-opacity: 0.7;
+    // Subtle inset-style depth on press: a soft drop shadow gives the cap
+    // a "pressed" feel without altering geometry.
+    filter: drop-shadow(0 1px 0 rgb(0 0 0 / 18%));
   }
 
   .symbol {

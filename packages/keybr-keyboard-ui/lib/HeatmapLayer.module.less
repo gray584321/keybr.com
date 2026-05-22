@@ -1,5 +1,11 @@
 .spot {
-  opacity: 0.7;
+  // Lowered base opacity + soft blur creates a smooth radial-gradient feel
+  // around hot keys without altering the underlying geometry / data.
+  opacity: 0.45;
+  filter: blur(1.5px);
+  transition: opacity var(--motion-base, 200ms)
+    var(--easing-emphasized, ease-out);
+  mix-blend-mode: multiply;
 }
 
 .spot_h {

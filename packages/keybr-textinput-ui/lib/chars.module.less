@@ -1,3 +1,46 @@
+.char {
+  /* Base class applied to every rendered character span. */
+  transition:
+    color var(--motion-fast, 140ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1)),
+    background-color var(--motion-fast, 140ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1)),
+    opacity var(--motion-fast, 140ms)
+      var(--easing-standard, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.normal {
+  /* Pending character — calm and faded. */
+  opacity: 0.82;
+}
+
+.hit {
+  /* Hit character — confident but quieter than pending. */
+  opacity: 0.55;
+}
+
+.miss {
+  opacity: 0.95;
+  /* Missed character — unmistakable but not jarring. */
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.18em;
+}
+
+.garbage {
+  padding-inline: 0.05em;
+  /* Extra typed characters that don't belong. */
+  border-radius: var(--radius-sm, 3px);
+}
+
+.special {
+  /* Whitespace dots, paragraph signs and other visible-whitespace glyphs. */
+  opacity: 0.32;
+  font-weight: 400;
+}
+
 .cursor {
   /* Marks a character under cursor. */
 }

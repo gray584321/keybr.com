@@ -8,4 +8,10 @@
 
 .frame {
   fill: var(--Keyboard-frame__color);
+  // Faint translucent stroke gives the frame a refined outline without
+  // touching its geometry (rx/ry are still set on the <rect>).
+  stroke: var(--surface-sunken, var(--primary-d2));
+  stroke-opacity: 0.5;
+  stroke-width: 0.5px;
+  transition: fill var(--motion-base, 200ms) var(--easing-emphasized, ease-out);
 }

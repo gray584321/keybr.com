@@ -3,6 +3,7 @@ import {
   CaretShapeStyle,
   type TextDisplaySettings,
 } from "@keybr/textinput";
+import { clsx } from "clsx";
 import {
   Component,
   createRef,
@@ -10,6 +11,7 @@ import {
   type ReactNode,
 } from "react";
 import { findCursor } from "./chars.tsx";
+import * as cursorStyles from "./Cursor.module.less";
 import { getCursorStyle } from "./styles.ts";
 
 export class Cursor extends Component<{
@@ -183,13 +185,22 @@ export class Cursor extends Component<{
   }
 
   override render(): ReactNode {
+    const { caretShapeStyle, caretMovementStyle } = this.props.settings;
+    const className = clsx(
+      cursorStyles.cursor,
+      caretMovementStyle === CaretMovementStyle.Smooth &&
+        cursorStyles.cursorSmooth,
+      caretShapeStyle === CaretShapeStyle.Block && cursorStyles.cursorBlock,
+      caretShapeStyle === CaretShapeStyle.Box && cursorStyles.cursorBox,
+    );
     return (
       <div ref={this.#containerRef} style={containerStyle}>
         <span
           ref={this.#cursorRef}
+          className={className}
           style={{
             ...cursorStyle,
-            ...getCursorStyle(this.props.settings.caretShapeStyle),
+            ...getCursorStyle(caretShapeStyle),
           }}
         />
         {this.props.children}

@@ -5,16 +5,14 @@ import { TypingSettings } from "@keybr/textinput-ui";
 import {
   Button,
   ExplainerBoundary,
-  Field,
-  FieldList,
-  Header,
   Icon,
-  Spacer,
+  Tab,
+  TabList,
   useView,
 } from "@keybr/widget";
 import { mdiCheckCircle, mdiDeleteForever } from "@mdi/js";
-import { useState } from "react";
-import { FormattedMessage, useIntl } from "react-intl";
+import { type ReactNode, useState } from "react";
+import { useIntl } from "react-intl";
 import { views } from "../views.tsx";
 import { ExplainSettings } from "./ExplainSettings.tsx";
 import { KeyboardSettings } from "./KeyboardSettings.tsx";
@@ -48,70 +46,81 @@ export function SettingsScreen() {
 function Content({ onSubmit }: { readonly onSubmit: () => void }) {
   const { formatMessage } = useIntl();
   const { settings, updateSettings } = useSettings();
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const tabs: ReadonlyArray<{ label: string; body: ReactNode }> = [
+    {
+      label: formatMessage({ id: "t_Lessons", defaultMessage: "Lessons" }),
+      body: <LessonSettings />,
+    },
+    {
+      label: formatMessage({ id: "t_Typing", defaultMessage: "Typing" }),
+      body: <TypingSettings />,
+    },
+    {
+      label: formatMessage({ id: "t_Keyboard", defaultMessage: "Keyboard" }),
+      body: <KeyboardSettings />,
+    },
+    {
+      label: formatMessage({
+        id: "t_Miscellaneous",
+        defaultMessage: "Miscellaneous",
+      }),
+      body: <MiscSettings />,
+    },
+  ];
+
   return (
-    <Screen>
+    <Screen className={styles.screen}>
       <ExplainerBoundary>
-        <ExplainSettings />
+        <div className={styles.shell}>
+          <header className={styles.header}>
+            <div className={styles.headerActions}>
+              <ExplainSettings />
+            </div>
+          </header>
 
-        <Header level={1}>
-          <FormattedMessage id="t_Lessons" defaultMessage="Lessons" />
-        </Header>
-        <LessonSettings />
+          <div className={styles.tabBar}>
+            <TabList
+              selectedIndex={tabIndex}
+              onSelect={(index) => {
+                setTabIndex(index);
+              }}
+            >
+              {tabs.map((tab, index) => (
+                <Tab key={index} label={tab.label} />
+              ))}
+            </TabList>
+          </div>
 
-        <Spacer size={5} />
+          <div className={styles.body}>
+            <div className={styles.bodyInner}>{tabs[tabIndex].body}</div>
+          </div>
 
-        <Header level={1}>
-          <FormattedMessage id="t_Typing" defaultMessage="Typing" />
-        </Header>
-        <TypingSettings />
-
-        <Spacer size={5} />
-
-        <Header level={1}>
-          <FormattedMessage id="t_Keyboard" defaultMessage="Keyboard" />
-        </Header>
-        <KeyboardSettings />
-
-        <Spacer size={5} />
-
-        <Header level={1}>
-          <FormattedMessage
-            id="t_Miscellaneous"
-            defaultMessage="Miscellaneous"
-          />
-        </Header>
-        <MiscSettings />
-
-        <div className={styles.footer}>
-          <FieldList>
-            <Field>
-              <Button
-                size={16}
-                icon={<Icon shape={mdiDeleteForever} />}
-                label={formatMessage({
-                  id: "t_Reset",
-                  defaultMessage: "Reset",
-                })}
-                onClick={() => {
-                  updateSettings(settings.reset());
-                }}
-              />
-            </Field>
-            <Field.Filler />
-            <Field>
-              <Button
-                size={16}
-                icon={<Icon shape={mdiCheckCircle} />}
-                label={formatMessage({
-                  id: "t_Done",
-                  defaultMessage: "Done",
-                })}
-                onClick={() => {
-                  onSubmit();
-                }}
-              />
-            </Field>
-          </FieldList>
+          <div className={styles.footer}>
+            <Button
+              size={16}
+              icon={<Icon shape={mdiDeleteForever} />}
+              label={formatMessage({
+                id: "t_Reset",
+                defaultMessage: "Reset",
+              })}
+              onClick={() => {
+                updateSettings(settings.reset());
+              }}
+            />
+            <Button
+              size={16}
+              icon={<Icon shape={mdiCheckCircle} />}
+              label={formatMessage({
+                id: "t_Done",
+                defaultMessage: "Done",
+              })}
+              onClick={() => {
+                onSubmit();
+              }}
+            />
+          </div>
         </div>
       </ExplainerBoundary>
     </Screen>

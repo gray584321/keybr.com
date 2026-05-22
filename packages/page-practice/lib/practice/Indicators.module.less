@@ -1,35 +1,103 @@
-.indicators {
-  padding-block-start: 1rem;
+@import "@keybr/widget/lib/index.less";
+
+.rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  inline-size: 100%;
+  padding-inline: var(--space-2);
+  padding-block: var(--space-3);
 }
 
-.liveSpeed {
-  padding-block-end: 0.5rem;
-  color: var(--text-color);
-  opacity: 0.85;
-  font-size: 1.25rem;
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--motion-base) var(--easing-standard);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.cardHeader {
+  color: var(--text-color-f1);
+  font-size: 0.75rem;
   font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: stretch;
+  min-inline-size: 0;
+}
+
+.currentKey {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+  font-size: 1rem;
   text-align: center;
 }
 
-.liveSpeedDim {
-  opacity: 0.35;
+.keySet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  align-items: center;
+}
+
+.streakList {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.dailyGoal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: stretch;
+}
+
+.effortLegend {
+  padding-inline: var(--space-3);
+  padding-block: var(--space-2);
+  color: var(--text-color-f1);
+  opacity: 0.75;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.tensionStrip {
+  padding-block: var(--space-1);
+  font-size: 0.75rem;
+  text-align: center;
 }
 
 .tensionRelaxed {
   opacity: 0.65;
-  font-size: 0.75rem;
   font-weight: 400;
 }
 
 .tensionFirm {
   color: var(--Chart-hist-f__color, var(--text-color));
   opacity: 0.85;
-  font-size: 0.75rem;
   font-weight: 500;
 }
 
 .tensionTight {
   color: var(--Chart-hist-m__color);
-  font-size: 0.75rem;
   font-weight: 600;
 }

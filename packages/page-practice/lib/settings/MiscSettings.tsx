@@ -1,21 +1,16 @@
 import { SpeedUnit, uiProps } from "@keybr/result";
 import { useSettings } from "@keybr/settings";
-import {
-  Description,
-  Explainer,
-  Field,
-  FieldList,
-  FieldSet,
-  OptionList,
-} from "@keybr/widget";
+import { Description, Explainer, FieldSet, OptionList } from "@keybr/widget";
 import { type ReactNode } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import * as styles from "./SettingsLayout.module.less";
 
 export function MiscSettings(): ReactNode {
   const { formatMessage } = useIntl();
   return (
     <>
       <FieldSet
+        className={styles.section}
         legend={formatMessage({
           id: "t_Interface_options",
           defaultMessage: "Interface options",
@@ -32,14 +27,14 @@ function SpeedUnitProp(): ReactNode {
   const { settings, updateSettings } = useSettings();
   return (
     <>
-      <FieldList>
-        <Field>
+      <div className={styles.grid}>
+        <div className={styles.label}>
           <FormattedMessage
             id="t_Measure_typing_speed_in:"
             defaultMessage="Measure typing speed in:"
           />
-        </Field>
-        <Field>
+        </div>
+        <div className={styles.control}>
           <OptionList
             options={SpeedUnit.ALL.map((item) => ({
               value: item.id,
@@ -52,8 +47,8 @@ function SpeedUnitProp(): ReactNode {
               );
             }}
           />
-        </Field>
-      </FieldList>
+        </div>
+      </div>
       <Explainer>
         <Description>
           <FormattedMessage

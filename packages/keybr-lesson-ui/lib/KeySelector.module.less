@@ -2,9 +2,25 @@
 
 .root {
   .is-blurred();
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-1, 0.25rem);
+  align-items: center;
+  padding-inline: var(--space-2, 0.5rem);
+  padding-block: var(--space-1, 0.25rem);
+  border-radius: var(--radius-md, 6px);
+  background-color: transparent;
+  transition:
+    background-color var(--motion-fast, 120ms) var(--easing-standard, ease),
+    box-shadow var(--motion-fast, 120ms) var(--easing-standard, ease);
+}
+
+.root:hover {
+  background-color: var(--surface-sunken, var(--primary-d1));
 }
 
 .root:focus-visible {
   .is-focused();
+  box-shadow: var(--ring-focus, 0 0 0 2px var(--accent, var(--secondary-l2)));
   outline-offset: 2px;
 }

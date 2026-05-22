@@ -1,0 +1,129 @@
+.hud {
+  display: flex;
+  gap: var(--space-4);
+  align-items: stretch;
+  justify-content: space-between;
+  padding-inline: var(--space-2);
+  padding-block: var(--space-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-inline-size: 0;
+}
+
+.label {
+  color: var(--text-color-f2);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.valueRow {
+  display: flex;
+  gap: var(--space-1);
+  align-items: baseline;
+  line-height: 1;
+}
+
+.value {
+  color: var(--text-color);
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: color var(--motion-base) var(--easing-standard);
+  font-variant-numeric: tabular-nums;
+}
+
+.statLive {
+  // The "speed" stat gets a subtle accent when live data is flowing.
+  .value {
+    color: var(--accent);
+    transition: color var(--motion-base) var(--easing-standard);
+  }
+}
+
+.valueMuted {
+  color: var(--text-color-f2);
+  opacity: 0.45;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.unit {
+  color: var(--text-color-f2);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.delta {
+  display: inline-flex;
+  gap: var(--space-1);
+  align-items: center;
+  color: var(--text-color-f2);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.deltaUp {
+  color: var(--Value--more__color, var(--text-color));
+}
+
+.deltaDown {
+  color: var(--Value--less__color, var(--text-color));
+}
+
+.separator {
+  align-self: stretch;
+  inline-size: 1px;
+  margin-inline: var(--space-2);
+  background-color: var(--separator-color);
+  opacity: 0.6;
+}
+
+.pill {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  block-size: 1.75rem;
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background-color: var(--surface-sunken);
+  transition: background-color var(--motion-base) var(--easing-standard);
+}
+
+.pillFill {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: 0;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-l1) 100%);
+  opacity: 0.55;
+  transition: inline-size var(--motion-slow) var(--easing-decel);
+}
+
+.pillReached {
+  .pillFill {
+    background: linear-gradient(
+      90deg,
+      var(--Value--more__color, var(--accent)) 0%,
+      var(--accent-l1) 100%
+    );
+    opacity: 0.85;
+  }
+}
+
+.pillLabel {
+  position: relative;
+  z-index: 1;
+  color: var(--text-color);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}

@@ -1,14 +1,33 @@
 .root {
   display: block;
+  padding-inline: var(--space-4, 1.5rem);
+  padding-block: var(--space-4, 1.5rem);
+  will-change: filter, opacity;
   font-kerning: none;
   font-variant: none;
-  line-height: 1.2;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
   user-select: none;
+  transition:
+    filter var(--motion-base, 220ms)
+      var(--easing-decel, cubic-bezier(0, 0, 0.2, 1)),
+    opacity var(--motion-base, 220ms)
+      var(--easing-decel, cubic-bezier(0, 0, 0.2, 1));
+  font-feature-settings:
+    "kern" 0,
+    "liga" 0,
+    "calt" 0,
+    "clig" 0,
+    "tnum" 1,
+    "zero" 1;
+  font-variant-ligatures: none;
+  font-variant-numeric: tabular-nums slashed-zero;
 }
 
 .wrap {
   overflow: visible;
   white-space: break-spaces;
+  overflow-wrap: break-word;
 }
 
 .nowrap {
@@ -17,11 +36,13 @@
 }
 
 .focus {
+  opacity: 1;
   filter: none;
 }
 
 .blur {
-  filter: blur(3px);
+  opacity: 0.78;
+  filter: blur(3px) saturate(0.85);
 }
 
 .size_X0 {

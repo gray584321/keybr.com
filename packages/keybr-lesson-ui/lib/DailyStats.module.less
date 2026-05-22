@@ -1,3 +1,30 @@
 .root {
-  padding: 1rem;
+  min-inline-size: 14rem;
+  padding-inline: var(--space-4, 1rem);
+  padding-block: var(--space-3, 0.75rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.header {
+  margin-block-end: var(--space-2, 0.5rem);
+  color: var(--text-color);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  padding-block: var(--space-1, 0.25rem);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+
+  & + & {
+    border-block-start: 1px solid
+      var(--surface-sunken, var(--separator-color, var(--primary-d1)));
+  }
 }

@@ -5,6 +5,7 @@ import {
   WhitespaceStyle,
 } from "@keybr/textinput";
 import { type CodePoint } from "@keybr/unicode";
+import { clsx } from "clsx";
 import { type ReactNode } from "react";
 import * as styles from "./chars.module.less";
 import { getTextStyle } from "./styles.ts";
@@ -21,7 +22,7 @@ export function renderChars(
       nodes.push(
         <span
           key={nodes.length}
-          className={getClassName(span)}
+          className={getClassName(span, /* special= */ false)}
           style={getTextStyle(span, /* special= */ false)}
         >
           {String.fromCodePoint(...span.chars)}
@@ -42,7 +43,7 @@ export function renderChars(
       nodes.push(
         <span
           key={nodes.length}
-          className={getClassName(span)}
+          className={getClassName(span, /* special= */ true)}
           style={getTextStyle(span, /* special= */ true)}
         >
           {specialChar(settings.whitespaceStyle, codePoint)}
@@ -57,25 +58,36 @@ export function renderChars(
 function specialChar(whitespaceStyle: WhitespaceStyle, codePoint: CodePoint) {
   switch (codePoint) {
     case 0x0009:
-      return "\uE002";
+      return "";
     case 0x000a:
-      return "\uE003";
+      return "";
     case 0x0020:
       switch (whitespaceStyle) {
         case WhitespaceStyle.Bar:
-          return "\uE001";
+          return "";
         case WhitespaceStyle.Bullet:
-          return "\uE000";
+          return "";
         default:
-          return "\u00A0";
+          return " ";
       }
     default:
       return `U+${codePoint.toString(16).padStart(4, "0")}`;
   }
 }
 
-function getClassName({ attrs }: { readonly attrs: Attr }) {
-  return attrs === Attr.Cursor ? styles.cursor : undefined;
+function getClassName(
+  { attrs }: { readonly attrs: Attr },
+  special: boolean,
+): string {
+  return clsx(
+    styles.char,
+    special && styles.special,
+    attrs === Attr.Normal && !special && styles.normal,
+    attrs === Attr.Cursor && styles.cursor,
+    attrs === Attr.Hit && styles.hit,
+    attrs === Attr.Miss && styles.miss,
+    attrs === Attr.Garbage && styles.garbage,
+  );
 }
 
 const cursorSelector = `.${styles.cursor}`;

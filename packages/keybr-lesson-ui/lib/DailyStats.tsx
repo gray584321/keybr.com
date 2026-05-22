@@ -18,62 +18,64 @@ export function DailyStats({
   const { formatSpeed } = useFormatter();
   return (
     <div className={styles.root}>
-      <Para align="center">
+      <Para align="center" className={styles.header}>
         {formatDate(Number(date), { dateStyle: "long" })}
       </Para>
-      <div>
-        <NameValue
-          name={formatMessage({
-            id: "t_Daily_goal",
-            defaultMessage: "Daily goal",
-          })}
-          value={formatPercents(effort.effort(stats.time))}
-        />
-      </div>
-      <div>
-        <NameValue
-          name={formatMessage({
-            id: "t_Time",
-            defaultMessage: "Time",
-          })}
-          value={formatDuration(stats.time)}
-        />
-      </div>
-      <div>
-        <NameValue
-          name={formatMessage({
-            id: "t_num_Lessons",
-            defaultMessage: "Lessons",
-          })}
-          value={formatNumber(results.length)}
-        />
-      </div>
-      <div>
-        <NameValue
-          name={formatMessage({
-            id: "t_Top_speed",
-            defaultMessage: "Top speed",
-          })}
-          value={formatSpeed(stats.speed.max)}
-        />
-      </div>
-      <div>
-        <NameValue
-          name={formatMessage({
-            id: "t_Average_speed",
-            defaultMessage: "Average speed",
-          })}
-          value={formatSpeed(stats.speed.avg)}
-        />
-      </div>
-      <div>
-        <NameValue
-          name={formatMessage({
-            id: "t_Average_accuracy",
-            defaultMessage: "Average accuracy",
-          })}
-          value={formatPercents(stats.accuracy.avg)}
-        />
+      <div className={styles.list}>
+        <div className={styles.row}>
+          <NameValue
+            name={formatMessage({
+              id: "t_Daily_goal",
+              defaultMessage: "Daily goal",
+            })}
+            value={formatPercents(effort.effort(stats.time))}
+          />
+        </div>
+        <div className={styles.row}>
+          <NameValue
+            name={formatMessage({
+              id: "t_Time",
+              defaultMessage: "Time",
+            })}
+            value={formatDuration(stats.time)}
+          />
+        </div>
+        <div className={styles.row}>
+          <NameValue
+            name={formatMessage({
+              id: "t_num_Lessons",
+              defaultMessage: "Lessons",
+            })}
+            value={formatNumber(results.length)}
+          />
+        </div>
+        <div className={styles.row}>
+          <NameValue
+            name={formatMessage({
+              id: "t_Top_speed",
+              defaultMessage: "Top speed",
+            })}
+            value={formatSpeed(stats.speed.max)}
+          />
+        </div>
+        <div className={styles.row}>
+          <NameValue
+            name={formatMessage({
+              id: "t_Average_speed",
+              defaultMessage: "Average speed",
+            })}
+            value={formatSpeed(stats.speed.avg)}
+          />
+        </div>
+        <div className={styles.row}>
+          <NameValue
+            name={formatMessage({
+              id: "t_Average_accuracy",
+              defaultMessage: "Average accuracy",
+            })}
+            value={formatPercents(stats.accuracy.avg)}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import { useIntlNumbers } from "@keybr/intl";
 import { type StreakList as StreakListType } from "@keybr/result";
-import { type ClassName, styleTextTruncate, Value } from "@keybr/widget";
-import { FormattedMessage } from "react-intl";
+import { type ClassName } from "@keybr/widget";
+import { clsx } from "clsx";
+import { FormattedMessage, useIntl } from "react-intl";
+import * as styles from "./styles.module.less";
 
 export const StreakList = ({
   id,
@@ -12,36 +14,45 @@ export const StreakList = ({
   className?: ClassName;
   streakList: StreakListType;
 }) => {
+  const { formatMessage } = useIntl();
   const { formatPercents } = useIntlNumbers();
-  const children = [];
+  const pills: Array<{ level: number; count: number }> = [];
   for (const { level, results } of streakList) {
     if (results.length > 0) {
-      if (children.length > 0) {
-        children.push(" ");
-      }
-      children.push(
-        <FormattedMessage
-          id="streakList.streakLength"
-          defaultMessage="{length, plural, =1 {One lesson} other {# lessons}} with {accuracy} accuracy."
-          values={{
-            length: results.length,
-            accuracy: <Value value={formatPercents(level)} />,
-          }}
-        />,
-      );
+      pills.push({ level, count: results.length });
     }
   }
-  if (children.length === 0) {
-    children.push(
-      <FormattedMessage
-        id="streakList.noStreaks"
-        defaultMessage="No accuracy streaks."
-      />,
-    );
-  }
   return (
-    <span id={id} className={className}>
-      <span className={styleTextTruncate}>{...children}</span>
+    <span id={id} className={clsx(styles.streakList, className)}>
+      {pills.length === 0 ? (
+        <span className={clsx(styles.streakPill, styles.streakPillEmpty)}>
+          <FormattedMessage
+            id="streakList.noStreaks"
+            defaultMessage="No accuracy streaks."
+          />
+        </span>
+      ) : (
+        pills.map(({ level, count }) => {
+          const tooltip = formatMessage(
+            {
+              id: "streakList.streakLength",
+              defaultMessage:
+                "{length, plural, =1 {One lesson} other {# lessons}} with {accuracy} accuracy.",
+            },
+            {
+              length: count,
+              accuracy: formatPercents(level),
+            },
+          );
+          return (
+            <span key={level} className={styles.streakPill} title={tooltip}>
+              <span className={styles.streakPillLength}>{count}</span>
+              <span className={styles.streakPillSeparator}>·</span>
+              <span>{formatPercents(level)}</span>
+            </span>
+          );
+        })
+      )}
     </span>
   );
 };
