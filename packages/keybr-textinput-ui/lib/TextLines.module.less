@@ -26,8 +26,16 @@
 
 .wrap {
   overflow: visible;
+  text-align: center;
+  text-wrap: balance;
   white-space: break-spaces;
   overflow-wrap: break-word;
+}
+
+@supports not (text-wrap: balance) {
+  .wrap {
+    text-wrap: pretty;
+  }
 }
 
 .nowrap {
